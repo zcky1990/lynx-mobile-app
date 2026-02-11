@@ -4,6 +4,7 @@ import './App.css'
 import arrow from './assets/arrow.png'
 import lynxLogo from './assets/lynx-logo.png'
 import reactLynxLogo from './assets/react-logo.png'
+import { FlexGrowExample } from './components/Test'
 
 export function App(props: {
   onRender?: () => void
@@ -47,6 +48,10 @@ export function App(props: {
             </text>
             to see updates!
           </text>
+        </view>
+        <view>
+          <FlexGrowExample/>
+           <text className='bg-black font-xl'>React asdasdsa</text>
         </view>
         <view style={{ flex: 1 }} />
       </view>
