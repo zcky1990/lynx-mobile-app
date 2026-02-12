@@ -3,8 +3,13 @@ import '@lynx-js/react/debug'
 import { root } from '@lynx-js/react'
 
 import { App } from './App.jsx'
+import { ThemeProvider } from './providers/ThemeProvider'
 
-root.render(<App />)
+root.render(
+  <ThemeProvider defaultTheme="system">
+    <App />
+  </ThemeProvider>
+)
 
 if (import.meta.webpackHot) {
   import.meta.webpackHot.accept()
