@@ -4,10 +4,13 @@ import { root } from '@lynx-js/react'
 
 import { App } from './App.jsx'
 import { ThemeProvider } from './providers/ThemeProvider'
+import { ToastProvider } from './providers/ToastProvider.js'
 
 root.render(
   <ThemeProvider defaultTheme="system">
-    <App />
+    <ToastProvider>
+      <App />
+    </ToastProvider>
   </ThemeProvider>
 )
 

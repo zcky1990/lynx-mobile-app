@@ -1,14 +1,12 @@
 import { useCallback, useEffect, useState } from '@lynx-js/react'
-import { useTheme } from './providers'
+import { useTheme, useToast } from './providers'
 
 
 import './App.css'
 import arrow from './assets/arrow.png'
 import lynxLogo from './assets/lynx-logo.png'
 import reactLynxLogo from './assets/react-logo.png'
-import { FlexGrowExample } from './components/Test'
 import { Alert, type AlertProps } from './components/alert/Alert'
-import { Toast } from './components/toast/Toast'
 import type { ToastProps } from './components/toast/common'
 
 
@@ -17,9 +15,19 @@ export function App(props: {
 }) {
   const [alterLogo, setAlterLogo] = useState(false)
   const { theme, resolvedTheme, setTheme, toggleTheme } = useTheme()
+  const { setToast, toggleToast,} = useToast();
 
+  const toastData : ToastProps = {
+    showToast: false,
+    toastTitle: 'Toast',
+    toastDescription: 'This is a toast',
+    toastVariant: 'error',
+    toastPosition: 'top',
+    toastDuration: 500,
+  }
 
   useEffect(() => {
+    setToast(toastData)
     console.info('Hello, ReactLynx')
   }, [])
   props.onRender?.()
@@ -41,14 +49,7 @@ export function App(props: {
     buttonCancelOnClick: () => { },
   }
 
-  const [toastProps, setToastProps] = useState<ToastProps>({
-    showToast: false,
-    toastTitle: 'Toast',
-    toastDescription: 'This is a toast',
-    toastVariant: 'error',
-    toastPosition: 'top',
-    toastDuration: 500,
-  })
+  
 
   return (
     <view>
@@ -65,18 +66,25 @@ export function App(props: {
         </view>
         <view className='Content'>
           <Alert {...alertProps} />
-          <Toast {...toastProps} />
           <view>
-            <view bindtap={() => setToastProps({...toastProps, toastVariant:'success', showToast: true} as ToastProps)}>
+            <view bindtap={() => {
+              toggleToast({...toastData, toastVariant: 'error'})
+              }}>
+              <text>SHOW Error TOAST</text>
+            </view>
+            <view bindtap={() => {
+              toggleToast({...toastData, toastVariant: 'success'})
+              }}>
               <text>SHOW SUCCESS TOAST</text>
             </view>
-            <view bindtap={() => setToastProps({...toastProps, toastVariant:'error', showToast: true} as ToastProps)}>
-              <text>SHOW ERROR TOAST</text>
-            </view>
-            <view bindtap={() => setToastProps({...toastProps, toastVariant:'info', showToast: true} as ToastProps)}>
+            <view bindtap={() => {
+              toggleToast({...toastData, toastVariant: 'info'})
+              }}>
               <text>SHOW INFO TOAST</text>
             </view>
-            <view bindtap={() => setToastProps({...toastProps, toastVariant:'warning', showToast: true} as ToastProps)}>
+            <view bindtap={() => {
+              toggleToast({...toastData, toastVariant: 'warning'})
+              }}>
               <text>SHOW WARNING TOAST</text>
             </view>
             <text>Current: {resolvedTheme}</text>
