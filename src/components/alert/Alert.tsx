@@ -22,7 +22,7 @@ export const Alert = (props: AlertProps) => {
     buttonCancelOnClick = () => {},
   } = props
   return (
-    <view className="grid gap-0.5 rounded-lg border shadow-md px-4 py-3 text-left text-sm relative bg-card text-card-foreground w-full max-w-lg-full max-w-lg">
+    <view className="flex flex-grow flex-col justify-between gap-0.5 rounded-lg border shadow-md px-4 py-3 text-left text-sm relative bg-card text-card-foreground w-full">
             <view className="col-span-2 flex items-center justify-between gap-4">
         <view className="flex flex-col gap-0.5">
             <text className="font-medium text-foreground">{title}</text>

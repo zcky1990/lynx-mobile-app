@@ -47,9 +47,9 @@ export function App(props: {
     showSubmitButton: true,
     showCancelButton: true,
     buttonSubmitLabel: 'Submit',
-    buttonSubmitOnClick: () => { },
+    buttonSubmitOnClick: () => toggleToast({...toastData, toastDuration: 3000, toastVariant: 'success'}),
     buttonCancelLabel: 'Cancel',
-    buttonCancelOnClick: () => { },
+    buttonCancelOnClick: () => toggleToast({...toastData, toastDuration: 3000, toastVariant: 'error'}),
   }
 
   const accordion :AccordionProps = {
@@ -89,29 +89,16 @@ export function App(props: {
           <text className='Title'>React</text>
           <text className='Subtitle'>on Lynx</text>
         </view>
-        <view className='Content'>
-          <Alert {...alertProps} />
-          <Accordion {...accordion} />
+        <view className='Content px-4'>
+          <view className='flex flex-col gap-2 py-8 px-4'>
+            <Alert {...alertProps} />
+            <Accordion {...accordion} />
+          </view>
           <view>
             <view bindtap={() => {
               toggleToast({...toastData, toastDuration: 3000, toastVariant: 'error'})
               }}>
               <text>SHOW Error TOAST</text>
-            </view>
-            <view bindtap={() => {
-              toggleToast({...toastData, toastVariant: 'success'})
-              }}>
-              <text>SHOW SUCCESS TOAST</text>
-            </view>
-            <view bindtap={() => {
-              toggleToast({...toastData, toastVariant: 'info'})
-              }}>
-              <text>SHOW INFO TOAST</text>
-            </view>
-            <view bindtap={() => {
-              toggleToast({...toastData, toastVariant: 'warning'})
-              }}>
-              <text>SHOW WARNING TOAST</text>
             </view>
             <text>Current: {resolvedTheme}</text>
             <view bindtap={toggleTheme}>
