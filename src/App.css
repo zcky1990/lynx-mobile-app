@@ -20,6 +20,9 @@
   --accent-foreground: oklch(0.208 0.042 265.755);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
+  --success: oklch(34% .69 165.96);
+  --info: oklch(36% .68 241.16);
+  --warning: oklch(76.9% .288 70.08);
   --border: oklch(0.929 0.013 255.508);
   --input: oklch(0.929 0.013 255.508);
   --ring: oklch(0.704 0.04 256.788);
@@ -55,6 +58,9 @@
   --accent-foreground: oklch(0.984 0.003 247.858);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
+  --success: oklch(34% .69 165.96);
+  --info: oklch(36% .68 241.16);
+  --warning: oklch(76.9% .288 70.08);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.551 0.027 264.364);
@@ -148,4 +154,72 @@
 
 .text-secondary-foreground {
   color: var(--secondary-foreground);
+}
+
+/* success*/
+.bg-success {
+  background-color: color-mix(in oklab,var(--success)5%,transparent);
+}
+
+.border-success {
+  border-color: color-mix(in oklab,var(--success)80%,transparent)
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-success-foreground {
+  color: color-mix(in oklab,var(--success)80%,transparent)
+}
+
+/* desctructive*/
+.bg-destructive {
+  background-color: color-mix(in oklab,var(--destructive)5%,transparent);
+}
+
+.border-destructive {
+  border-color: color-mix(in oklab,var(--destructive)80%,transparent)
+}
+
+.text-destructive {
+  color: var(--destructive);
+}
+
+.text-destructive-foreground {
+  color: color-mix(in oklab,var(--destructive)80%,transparent)
+}
+
+/* warning */
+.bg-warning {
+  background-color: color-mix(in oklab,var(--warning)5%,transparent);
+}
+
+.border-warning {
+  border-color: color-mix(in oklab,var(--warning)80%,transparent)
+}
+
+.text-warning {
+  color: var(--warning);
+}
+
+.text-warning-foreground {
+  color: color-mix(in oklab,var(--warning)80%,transparent)
+}
+
+/* info */
+.bg-info {
+  background-color: color-mix(in oklab,var(--info)5%,transparent);
+}
+
+.border-info {
+  border-color: color-mix(in oklab,var(--info)80%,transparent)
+}
+
+.text-info {
+  color: var(--info);
+}
+
+.text-info-foreground {
+  color: color-mix(in oklab,var(--info)80%,transparent)
 }

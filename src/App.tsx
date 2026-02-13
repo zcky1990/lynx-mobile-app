@@ -8,6 +8,9 @@ import lynxLogo from './assets/lynx-logo.png'
 import reactLynxLogo from './assets/react-logo.png'
 import { FlexGrowExample } from './components/Test'
 import { Alert, type AlertProps } from './components/alert/Alert'
+import { Toast } from './components/toast/Toast'
+import type { ToastProps } from './components/toast/common'
+
 
 export function App(props: {
   onRender?: () => void
@@ -33,10 +36,19 @@ export function App(props: {
     showSubmitButton: true,
     showCancelButton: true,
     buttonSubmitLabel: 'Submit',
-    buttonSubmitOnClick: () => {},
+    buttonSubmitOnClick: () => { },
     buttonCancelLabel: 'Cancel',
-    buttonCancelOnClick: () => {},
+    buttonCancelOnClick: () => { },
   }
+
+  const [toastProps, setToastProps] = useState<ToastProps>({
+    showToast: false,
+    toastTitle: 'Toast',
+    toastDescription: 'This is a toast',
+    toastVariant: 'error',
+    toastPosition: 'top',
+    toastDuration: 500,
+  })
 
   return (
     <view>
@@ -53,37 +65,32 @@ export function App(props: {
         </view>
         <view className='Content'>
           <Alert {...alertProps} />
+          <Toast {...toastProps} />
           <view>
-      <text>Current: {resolvedTheme}</text>
-      <view bindtap={toggleTheme}>
-        <text>Toggle theme</text>
-      </view>
-      <view bindtap={() => setTheme('dark')}>
-        <text>Dark</text>
-      </view>
-      <view bindtap={() => setTheme('light')}>
-        <text>Light</text>
-      </view>
-    </view>
-          <image src={arrow} className='Arrow' />
-          <text className='Description'>Tap the logo and have fun!</text>
-          <text className='Hint'>
-            Edit<text
-              style={{
-                fontStyle: 'italic',
-                color: 'rgba(255, 255, 255, 0.85)',
-              }}
-            >
-              {' src/App.tsx '}
-            </text>
-            to see updates!
-          </text>
+            <view bindtap={() => setToastProps({...toastProps, toastVariant:'success', showToast: true} as ToastProps)}>
+              <text>SHOW SUCCESS TOAST</text>
+            </view>
+            <view bindtap={() => setToastProps({...toastProps, toastVariant:'error', showToast: true} as ToastProps)}>
+              <text>SHOW ERROR TOAST</text>
+            </view>
+            <view bindtap={() => setToastProps({...toastProps, toastVariant:'info', showToast: true} as ToastProps)}>
+              <text>SHOW INFO TOAST</text>
+            </view>
+            <view bindtap={() => setToastProps({...toastProps, toastVariant:'warning', showToast: true} as ToastProps)}>
+              <text>SHOW WARNING TOAST</text>
+            </view>
+            <text>Current: {resolvedTheme}</text>
+            <view bindtap={toggleTheme}>
+              <text>Toggle theme</text>
+            </view>
+            <view bindtap={() => setTheme('dark')}>
+              <text>Dark</text>
+            </view>
+            <view bindtap={() => setTheme('light')}>
+              <text>Light</text>
+            </view>
+          </view>
         </view>
-        <view>
-          <FlexGrowExample/>
-           <text className='bg-black font-xl'>React asdasdsa</text>
-        </view>
-        <view style={{ flex: 1 }} />
       </view>
     </view>
   )
