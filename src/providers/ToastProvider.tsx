@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from '@lynx-js/react'
-import type { ToastProps } from '../components/toast/common'
-import { Toast } from '../components/toast/Toast'
+import type { ToastProps } from '../components/Toast/ToastCommon'
+import { Toast } from '../components/Toast/Toast'
 
 interface ToastContextValue {
   toast: ToastProps

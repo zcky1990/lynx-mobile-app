@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { AccordionItemProps } from "./common";
+import type { AccordionItemProps } from "./AccordionCommon";
 import arrowUp from "./../../assets/arrow-up.png";
 import arrowDown from "./../../assets/arrow-down.png";
 

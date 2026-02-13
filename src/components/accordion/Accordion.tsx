@@ -1,5 +1,5 @@
 import { AccordionItem } from "./AccordionItem";
-import type { AccordionProps } from "./common";
+import type { AccordionProps } from "./AccordionCommon";
 
 export const Accordion = (props: AccordionProps) => {
     const { title = "title", description = "description", items = [] } = props;

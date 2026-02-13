@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import type { ToastProps } from "./common"
+import type { ToastProps } from "./ToastCommon"
 import useToast from "./hook/useToast"
 
 export const Toast = (props: ToastProps) => {

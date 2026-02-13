@@ -1,6 +1,5 @@
 import { useState } from "react"
-import type { ToastProps } from "./../common"
-import type { Variant, FontType } from "./../common"
+import type { ToastProps, FontType, Variant } from "../ToastCommon"
 
 const useToast = (props: ToastProps) => {
     const {
