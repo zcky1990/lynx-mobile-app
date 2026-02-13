@@ -95,17 +95,8 @@
   width: 100%;
 }
 
-.bg-card {
-  background-color: var(--card);
-  color: var(--card-foreground);
-}
-
 .text-foreground{
   color:var(--foreground)
-}
-
-.text-card-foreground {
-  color: var(--card-foreground);
 }
 
 .text-muted-foreground {
@@ -126,6 +117,16 @@
 
 .text-secondary-foreground {
   color: var(--secondary-foreground);
+}
+
+/* card */
+.bg-card {
+  background-color: var(--card);
+  color: var(--card-foreground);
+}
+
+.text-card-foreground {
+  color: var(--card-foreground);
 }
 
 /* success*/

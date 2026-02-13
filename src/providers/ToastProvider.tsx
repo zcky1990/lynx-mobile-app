@@ -12,11 +12,11 @@ const ToastContext = createContext<ToastContextValue | null>(null)
 export function ToastProvider({
   toast = {
     showToast: false,
-    toastTitle: 'Toast',
-    toastDescription: 'This is a toast',
-    toastVariant: 'error',
+    toastTitle: 'Toast title',
+    toastDescription: 'This is a toast message',
+    toastVariant: 'success',
     toastPosition: 'top',
-    toastDuration: 500,
+    toastDuration: 1000,
   },
   children,
 }: {
