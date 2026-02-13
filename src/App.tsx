@@ -8,6 +8,9 @@ import lynxLogo from './assets/lynx-logo.png'
 import reactLynxLogo from './assets/react-logo.png'
 import { Alert, type AlertProps } from './components/alert/Alert'
 import type { ToastProps } from './components/toast/common'
+import type { AccordionProps } from './components/accordion/common'
+import { Accordion } from './components/accordion/Accordion'
+import { describe } from 'vitest'
 
 
 export function App(props: {
@@ -15,7 +18,7 @@ export function App(props: {
 }) {
   const [alterLogo, setAlterLogo] = useState(false)
   const { theme, resolvedTheme, setTheme, toggleTheme } = useTheme()
-  const { setToast, toggleToast,} = useToast();
+  const { toggleToast,} = useToast();
 
   const toastData : ToastProps = {
     showToast: false,
@@ -49,6 +52,28 @@ export function App(props: {
     buttonCancelOnClick: () => { },
   }
 
+  const accordion :AccordionProps = {
+    title: "What is ReactLynx?",
+    description: "ReactLynx is a library for building web applications with React and Lynx. It provides a set of components and utilities for building web applications.",
+    items: [
+      {
+        title: "What is ReactLynx?",
+      description: "ReactLynx is a library for building web applications with React and Lynx. It provides a set of components and utilities for building web applications.",
+      },
+      {
+        title: "What is ReactLynx?",
+      description: "ReactLynx is a library for building web applications with React and Lynx. It provides a set of components and utilities for building web applications.",
+      },
+      {
+        title: "What is ReactLynx?",
+      description: "ReactLynx is a library for building web applications with React and Lynx. It provides a set of components and utilities for building web applications.",
+      },
+      {
+        title: "What is ReactLynx?",
+      description: "ReactLynx is a library for building web applications with React and Lynx. It provides a set of components and utilities for building web applications.",
+      }
+    ]
+  }
   
 
   return (
@@ -66,6 +91,7 @@ export function App(props: {
         </view>
         <view className='Content'>
           <Alert {...alertProps} />
+          <Accordion {...accordion} />
           <view>
             <view bindtap={() => {
               toggleToast({...toastData, toastDuration: 3000, toastVariant: 'error'})
