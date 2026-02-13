@@ -27,7 +27,7 @@ export function App(props: {
   }
 
   useEffect(() => {
-    setToast(toastData)
+    // setToast(toastData)
     console.info('Hello, ReactLynx')
   }, [])
   props.onRender?.()
@@ -68,7 +68,7 @@ export function App(props: {
           <Alert {...alertProps} />
           <view>
             <view bindtap={() => {
-              toggleToast({...toastData, toastVariant: 'error'})
+              toggleToast({...toastData, toastDuration: 3000, toastVariant: 'error'})
               }}>
               <text>SHOW Error TOAST</text>
             </view>

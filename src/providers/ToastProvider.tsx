@@ -4,7 +4,6 @@ import { Toast } from '../components/toast/Toast'
 
 interface ToastContextValue {
   toast: ToastProps
-  setToast: (toast: ToastProps) => void
   toggleToast: (toast?: ToastProps) => void
 }
 
@@ -26,10 +25,6 @@ export function ToastProvider({
 }) {
   const [toastState, setToastState] = useState<ToastProps>(toast)
 
-  const setToast = useCallback((data: ToastProps) => {
-    setToastState(data);  
-  }, [])
-
   const toggleToast = useCallback((data?: ToastProps) => {
     setToastState({...(data || toastState), showToast: true })
   }, [toastState, toast])
@@ -38,7 +33,6 @@ export function ToastProvider({
     <ToastContext.Provider
       value={{
         toast,
-        setToast,
         toggleToast,
       }}
     >
