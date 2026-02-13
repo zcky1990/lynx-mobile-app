@@ -6,7 +6,7 @@ export const Accordion = (props: AccordionProps) => {
 
     return <view className="px-4 py-32 w-full">
         <view className="flex flex-col gap-1 container">
-            <text className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl">{title}</text>
+            <text className="text-foreground mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl">{title}</text>
             <text className="text-muted-foreground lg:text-lg">{description}</text>
         </view>
         <view className="py-4">
