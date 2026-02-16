@@ -11,7 +11,7 @@ export const Accordion = (props: AccordionProps) => {
         </view>
         <view className="py-4">
         {items.map((item, index) => (
-            <view className={ index < items.length-1 ? 'py-2 border-b border-gray-300':'py-4 border-b-0' }>
+            <view className={ index < items.length-1 ? 'py-2 border-b':'py-4' }>
                 <AccordionItem key={index} {...item} />
             </view>
         ))}

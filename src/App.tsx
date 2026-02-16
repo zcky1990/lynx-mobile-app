@@ -10,6 +10,8 @@ import { Alert, type AlertProps } from './components/Alert/Alert'
 import type { ToastProps } from './components/Toast/ToastCommon'
 import type { AccordionProps } from './components/Accordion/AccordionCommon'
 import { Accordion } from './components/Accordion/Accordion'
+import type { SettingsNotificationsProps } from './components/SettingsNotifications/SettingsNotificationsCommon'
+import { SettingsNotifications } from './components/SettingsNotifications/SettingsNotifications'
 import { describe } from 'vitest'
 
 
@@ -74,7 +76,14 @@ export function App(props: {
       }
     ]
   }
-  
+
+  const settingsNotifications: SettingsNotificationsProps = {
+    items: [
+      { title: "Push Notifications", description: "Receive push notifications on this device.", checked: true },
+      { title: "Email Notifications", description: "Get notified by email when something happens." },
+      { title: "SMS Notifications", description: "Receive text messages for important updates.", checked: false },
+    ],
+  }
 
   return (
     <view>
@@ -93,6 +102,7 @@ export function App(props: {
           <view className='flex flex-col gap-2 py-8 px-4'>
             <Alert {...alertProps} />
             <Accordion {...accordion} />
+            <SettingsNotifications {...settingsNotifications} />
           </view>
           <view>
             <view bindtap={() => {

@@ -99,6 +99,30 @@
   border-color: var(--border);
 }
 
+.bg-input {
+  background-color: var(--input);
+}
+
+.border-border {
+  border-color: var(--border);
+}
+
+.border-l {
+  border-left-color: var(--border);;
+}
+
+.border-t {
+  border-top-color: var(--border);;
+}
+
+.border-r {
+  border-right-color: var(--border);;
+}
+
+.border-b {
+  border-bottom-color: var(--border);;
+}
+
 .bg-background {
   background-color: var(--background);
   color: var(--foreground);
