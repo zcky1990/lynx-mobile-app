@@ -17,12 +17,23 @@ import { Badge } from './components/Badge/Badge'
 import { Card } from './components/Card/Card'
 import { Breadcrumb } from './components/Breadcrumb/Breadcrumb'
 import { Divider } from './components/Divider/Divider'
+import { Checkbox } from './components/Checkbox'
 
 
 export function App(props: {
   onRender?: () => void
 }) {
   const [alterLogo, setAlterLogo] = useState(false)
+  const [baseChecked, setBaseChecked] = useState(false)
+  const [describedChecked, setDescribedChecked] = useState(true)
+  const [groupItems, setGroupItems] = useState([
+    { label: 'Email updates', description: 'Get notified about new features and releases.', checked: true },
+    { label: 'Marketing', description: 'Receive tips and product updates.', checked: false },
+    { label: 'Security alerts', description: 'Important security notifications.', checked: true },
+  ])
+  const setGroupItemChecked = useCallback((index: number, checked: boolean) => {
+    setGroupItems(prev => prev.map((it, i) => i === index ? { ...it, checked } : it))
+  }, [])
   const { theme, resolvedTheme, setTheme, toggleTheme } = useTheme()
   const { toggleToast,} = useToast();
 
@@ -151,6 +162,12 @@ export function App(props: {
               <Divider variant="gradient" align="left" />
               <Divider variant="base" align="right" />
               <Divider variant="gradient" align="right" />
+            </view>
+            <view className="mt-4 flex flex-col gap-4">
+              <text className="text-sm font-medium text-foreground">Checkboxes</text>
+              <Checkbox label="Base checkbox" checked={baseChecked} onCheckedChange={setBaseChecked} />
+              <Checkbox label="Described" description="Optional description below the label." checked={describedChecked} onCheckedChange={setDescribedChecked} />
+              <Checkbox.Group items={groupItems.map((item, index) => ({ ...item, onCheckedChange: (c: boolean) => setGroupItemChecked(index, c) }))} />
             </view>
           </view>
           <view>

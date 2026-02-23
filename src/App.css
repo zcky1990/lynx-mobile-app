@@ -293,3 +293,36 @@
 .Divider-line--gradient[data-align="right"] {
   background: linear-gradient(to right, transparent, var(--border));
 }
+
+/* Checkbox: HyperUI-style application checkboxes */
+.Checkbox-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  min-width: 1.25rem;
+  min-height: 1.25rem;
+  border-radius: 0.25rem;
+  border: 2px solid var(--input);
+  background-color: var(--background);
+  box-sizing: border-box;
+}
+.Checkbox-box--checked,
+.Checkbox-box[data-checked="true"] {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+.Checkbox-box--disabled,
+.Checkbox-box[data-interaction="disabled"] {
+  opacity: 0.5;
+}
+.Checkbox-check {
+  color: var(--primary-foreground);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.Checkbox-box:not(.Checkbox-box--checked) .Checkbox-check {
+  display: none;
+}
