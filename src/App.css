@@ -140,6 +140,10 @@
   background-color: var(--primary);
 }
 
+.bg-primary-foreground {
+  background-color: var(--primary-foreground);
+}
+
 .text-primary-foreground {
   color: var(--primary-foreground);
 }
@@ -228,4 +232,64 @@
 
 .text-info-foreground {
   color: color-mix(in oklab,var(--info)80%,transparent)
+}
+
+/* Switch: explicit sizes and border-radius for web preview */
+.Switch-track {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  width: 2.75rem;
+  height: 1.5rem;
+  min-width: 2.75rem;
+  min-height: 1.5rem;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.Switch-track--on {
+  justify-content: flex-end;
+  background-color: var(--primary);
+}
+.Switch-track--off {
+  justify-content: flex-start;
+  background-color: var(--input);
+}
+.Switch-track[data-value="on"] {
+  justify-content: flex-end;
+  background-color: var(--primary);
+}
+.Switch-track[data-value="off"] {
+  justify-content: flex-start;
+  background-color: var(--input);
+}
+.Switch-track--disabled,
+.Switch-track[data-interaction="disabled"] {
+  opacity: 0.5;
+}
+.Switch-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  min-width: 1.25rem;
+  min-height: 1.25rem;
+  border-radius: 50%;
+  background-color: var(--primary-foreground);
+  flex-shrink: 0;
+  margin: 0 2px;
+  box-sizing: border-box;
+}
+
+/* Divider: HyperUI-style horizontal dividers */
+.Divider-line {
+  background-color: var(--border);
+}
+.Divider-line--gradient {
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+}
+.Divider-line--gradient[data-align="left"] {
+  background: linear-gradient(to right, var(--border), transparent);
+}
+.Divider-line--gradient[data-align="right"] {
+  background: linear-gradient(to right, transparent, var(--border));
 }

@@ -12,7 +12,11 @@ import type { AccordionProps } from './components/Accordion/AccordionCommon'
 import { Accordion } from './components/Accordion/Accordion'
 import type { SettingsNotificationsProps } from './components/SettingsNotifications/SettingsNotificationsCommon'
 import { SettingsNotifications } from './components/SettingsNotifications/SettingsNotifications'
-import { describe } from 'vitest'
+import { Button } from './components/Button/Button'
+import { Badge } from './components/Badge/Badge'
+import { Card } from './components/Card/Card'
+import { Breadcrumb } from './components/Breadcrumb/Breadcrumb'
+import { Divider } from './components/Divider/Divider'
 
 
 export function App(props: {
@@ -79,9 +83,9 @@ export function App(props: {
 
   const settingsNotifications: SettingsNotificationsProps = {
     items: [
-      { title: "Push Notifications", description: "Receive push notifications on this device.", checked: true },
+      { title: "Push Notifications", description: "Receive push notifications on this device.", value: "on" },
       { title: "Email Notifications", description: "Get notified by email when something happens." },
-      { title: "SMS Notifications", description: "Receive text messages for important updates.", checked: false },
+      { title: "SMS Notifications", description: "Receive text messages for important updates.", value: "off" },
     ],
   }
 
@@ -89,20 +93,65 @@ export function App(props: {
     <view>
       <view className='Background' />
       <view className='App bg-background'>
-        <view className='Banner'>
-          <view className='Logo' bindtap={onTap}>
-            {alterLogo
-              ? <image src={reactLynxLogo} className='Logo--react' />
-              : <image src={lynxLogo} className='Logo--lynx' />}
-          </view>
-          <text className='Title'>React</text>
-          <text className='Subtitle'>on Lynx</text>
-        </view>
+        <scroll-view scroll-orientation="vertical"
+        style={{ width: "100%", height: "100vh", paddingLeft: "5px", borderRadius: "10px" }}
+        >
         <view className='Content px-4'>
           <view className='flex flex-col gap-2 py-8 px-4'>
             <Alert {...alertProps} />
             <Accordion {...accordion} />
             <SettingsNotifications {...settingsNotifications} />
+            <view className="flex flex-wrap gap-2 items-center mt-4">
+              <Button variant="solid" size="md" onPress={() => toggleToast({ ...toastData, toastVariant: 'success' })}>Primary</Button>
+              <Button variant="outline" size="md" onPress={() => {}}>Outline</Button>
+              <Button variant="ghost" size="md" onPress={() => {}}>Ghost</Button>
+              <Badge variant="primary">12</Badge>
+              <Badge variant="success">New</Badge>
+              <Badge variant="outline">Draft</Badge>
+            </view>
+            <Card className="mt-4">
+              <Card.Header>
+                <text className="font-semibold text-foreground">Card title</text>
+              </Card.Header>
+              <Card.Body>
+                <text className="text-muted-foreground text-sm">HyperUI-style card with optional header, body and footer.</text>
+              </Card.Body>
+              <Card.Footer>
+                <view className="flex flex-row gap-2">
+                  <Button variant="solid" size="sm" onPress={() => {}}>Save</Button>
+                  <Button variant="outline" size="sm" onPress={() => {}}>Cancel</Button>
+                </view>
+              </Card.Footer>
+            </Card>
+            <view className="mt-4 flex flex-col gap-3">
+              <text className="text-sm font-medium text-foreground">Breadcrumbs</text>
+              <Breadcrumb
+                items={[
+                  { label: 'Home', onPress: () => {} },
+                  { label: 'Products', onPress: () => {} },
+                  { label: 'Shoes' },
+                ]}
+                divider="chevron"
+              />
+              <Breadcrumb
+                items={[
+                  { label: 'Home', onPress: () => {} },
+                  { label: 'Settings', onPress: () => {} },
+                  { label: 'Notifications' },
+                ]}
+                divider="slash"
+                showHomeIcon
+              />
+            </view>
+            <view className="mt-4 flex flex-col gap-4">
+              <text className="text-sm font-medium text-foreground">Dividers</text>
+              <Divider variant="base" />
+              <Divider variant="gradient" />
+              <Divider variant="base" align="left" />
+              <Divider variant="gradient" align="left" />
+              <Divider variant="base" align="right" />
+              <Divider variant="gradient" align="right" />
+            </view>
           </view>
           <view>
             <view bindtap={() => {
@@ -122,6 +171,7 @@ export function App(props: {
             </view>
           </view>
         </view>
+        </scroll-view>
       </view>
     </view>
   )

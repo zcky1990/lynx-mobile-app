@@ -1,11 +1,13 @@
+import type { SwitchValue, SwitchInteraction } from "../Switch/SwitchCommon";
+
 export interface NotificationItemProps {
-    title: string;
-    description: string;
-    checked?: boolean;
-    onCheckedChange?: (checked: boolean) => void;
-    disabled?: boolean;
+  title: string;
+  description: string;
+  value?: SwitchValue;
+  onValueChange?: (value: SwitchValue) => void;
+  interaction?: SwitchInteraction;
 }
 
 export interface SettingsNotificationsProps {
-    items?: Array<NotificationItemProps>;
+  items?: Array<NotificationItemProps>;
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { AccordionItemProps } from "./AccordionCommon";
-import arrowUp from "./../../assets/arrow-up.png";
-import arrowDown from "./../../assets/arrow-down.png";
+import chevronUp from '../../assets/images/chevron-up.svg';
+import chevronDown from '../../assets/images/chevron-down.svg';
 
 const AccordionItem = (props: AccordionItemProps) => {
     const { title, description, open = false } = props;
@@ -11,7 +11,7 @@ const AccordionItem = (props: AccordionItemProps) => {
             <view className="flex flex-row items-center justify-between pt-2 pb-4 sm:mb-1 lg:mb-2">
                 <text className="text-foreground font-medium sm:py-1 lg:py-2 lg:text-lg">{title}</text>
                 <view className="flex flex-row items-center justify-center">
-                    {accordionItemState ? <image src={arrowUp} className="w-4 h-4"/> : <image src={arrowDown} className="w-4 h-4"/>}
+                    {accordionItemState ? <image src={chevronUp} className="w-4 h-4"/> : <image src={chevronDown} className="w-4 h-4"/>}
                 </view>
             </view>
             {accordionItemState ? 

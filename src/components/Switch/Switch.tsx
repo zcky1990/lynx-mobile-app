@@ -1,35 +1,22 @@
-import { useCallback } from "@lynx-js/react";
 import type { SwitchProps } from "./SwitchCommon";
+import { SwitchRoot } from "./SwitchRoot";
+import { SwitchThumb } from "./SwitchThumb";
+import { SwitchTrack } from "./SwitchTrack";
 
-/**
- * A minimal switch toggle. Tap to toggle checked state.
- * Styled to match shadcn-like appearance (rounded track, thumb).
- */
-export const Switch = (props: SwitchProps) => {
-    const { checked = false, onCheckedChange, disabled = false } = props;
+function SwitchComponent(props: SwitchProps) {
+  const { value, onValueChange, interaction } = props;
+  return (
+    <SwitchRoot value={value} onValueChange={onValueChange} interaction={interaction}>
+      <SwitchTrack>
+        <SwitchThumb />
+      </SwitchTrack>
+    </SwitchRoot>
+  );
+}
 
-    const onTap = useCallback(() => {
-        "background only";
-        if (!disabled && onCheckedChange) {
-            onCheckedChange(!checked);
-        }
-    }, [checked, disabled, onCheckedChange]);
-
-    return (
-        <view
-            className={[
-                "inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors",
-                disabled ? "opacity-50" : "",
-                checked ? "bg-primary" : "bg-input",
-            ].join(" ")}
-            bindtap={onTap}
-        >
-            <view
-                className={[
-                    "pointer-events-none block h-5 w-5 rounded-full bg-primary-foreground shadow-lg ring-0 transition-transform",
-                    checked ? "translate-x-5" : "translate-x-0.5",
-                ].join(" ")}
-            />
-        </view>
-    );
-};
+/** Compound Switch: use Switch.Root, Switch.Track, Switch.Thumb for custom layout. */
+export const Switch = Object.assign(SwitchComponent, {
+  Root: SwitchRoot,
+  Track: SwitchTrack,
+  Thumb: SwitchThumb,
+});
