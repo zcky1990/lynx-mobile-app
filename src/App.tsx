@@ -16,7 +16,8 @@ import { Breadcrumb } from './components/Breadcrumb/Breadcrumb'
 import { Divider } from './components/Divider/Divider'
 import { Checkbox } from './components/Checkbox'
 import { Loader } from './components/Loader/Loader'
-
+import { Tabs } from './components/Tabs'
+import { Input } from './components/Input/Input'
 
 export function App(props: {
   onRender?: () => void
@@ -110,6 +111,7 @@ export function App(props: {
     return () => clearInterval(interval);
   }, [seconds]);
 
+  const [asd, setAsd] = useState('')
 
   return (
     <view>
@@ -120,6 +122,31 @@ export function App(props: {
         >
         <view className='Content px-4'>
           <view className='flex flex-col gap-2 py-8 px-4'>
+            <text>{asd}</text>
+            <Input label="Input" 
+              placeholder="Input" 
+              type="email" interaction="enabled" 
+              validate={(val:String | number) => {
+                if (!val.toString().includes('@')) return "Format email salah";
+                if (val.toString().length < 5) return "Terlalu pendek";
+                return null; 
+              }}
+              value={asd} onChange={(value) => {setAsd(value as string)}} onPress={(value) => {console.log('Input pressed ', value)}} />
+
+          <Tabs defaultValue="profile">
+            <Tabs.List>
+              <Tabs.Trigger id="profile">Profile</Tabs.Trigger>
+              <Tabs.Trigger id="settings">Settings</Tabs.Trigger>
+            </Tabs.List>
+
+            <Tabs.Panel id="profile">
+              <text>Ini adalah konten profil user.</text>
+            </Tabs.Panel>
+            <Tabs.Panel id="settings">
+              <text>Pengaturan akun ada di sini.</text>
+            </Tabs.Panel>
+          </Tabs>
+
             <Loader type="spinner" label="test" properties={{ spinner: { size: 40 } }}  />
             <Loader type="loader" label="test" percentage={seconds} />
             <Alert {...alertProps} />
