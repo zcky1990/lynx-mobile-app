@@ -215,17 +215,17 @@ export function App(props: {
             <view bindtap={() => {
               toggleToast({...toastData, toastDuration: 3000, toastVariant: 'error'})
               }}>
-              <text>SHOW Error TOAST</text>
+              <text className='text-foreground'>SHOW Error TOAST</text>
             </view>
-            <text>Current: {resolvedTheme}</text>
+            <text className='text-foreground'>Current: {resolvedTheme}</text>
             <view bindtap={toggleTheme}>
-              <text>Toggle theme</text>
+              <text className='text-foreground'>Toggle theme</text>
             </view>
-            <view bindtap={() => setTheme('dark')}>
-              <text>Dark</text>
+            <view className='text-foreground' bindtap={() => setTheme('dark')}>
+              <text className='text-foreground'>Dark</text>
             </view>
-            <view bindtap={() => setTheme('light')}>
-              <text>Light</text>
+            <view className='text-foreground'bindtap={() => setTheme('light')}>
+              <text className='text-foreground'>Light</text>
             </view>
           </view>
         </view>
