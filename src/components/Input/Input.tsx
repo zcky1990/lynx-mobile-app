@@ -1,7 +1,10 @@
 import type {InputComponentsProps}
 from './InputCommon';
 import {useState} from '@lynx-js/react';
-import { Icon } from '../Icon/Icon';
+import {Icon} from '../Icon/Icon';
+import {useRef} from '@lynx-js/react';
+import type {NodesRef}
+from '@lynx-js/types';
 
 export const Input = (props : InputComponentsProps) => {
     const {
@@ -22,6 +25,7 @@ export const Input = (props : InputComponentsProps) => {
 
     const [currentText, setCurrentText] = useState(value);
     const [errorMessage, setErrorMessage] = useState < string | null > (null);
+    const inputRef = useRef < NodesRef > (null);
 
     const labelStyle: string = properties ?. label ?. style || '';
     const inputStyle: string = properties ?. input ?. style || '';
@@ -50,6 +54,8 @@ export const Input = (props : InputComponentsProps) => {
                 }
                 placeholder={placeholder}
                 type={type}
+                bindfocus={handleFocus}
+                bindblur={handleBlur}
                 bindinput={handleInput}/>
         );
     };
@@ -66,12 +72,38 @@ export const Input = (props : InputComponentsProps) => {
 
     const renderIcon = () => {
         return (
-            <view className="flex items-center justify-center flex-0" bindtap={
-                () => onPress ?. (currentText)
+            <view className="flex items-center justify-center flex-0"
+                bindtap={
+                    () => onPress ?. (currentText)
             }>
-                <Icon name={icon} size={properties?.icon?.size || 15} style={iconStyle} />
+                <Icon name={icon}
+                    size={
+                        properties ?. icon ?. size || 15
+                    }
+                    style={iconStyle}/>
             </view>
         );
+    }
+
+    const changeBorderColor = () => {
+        if (inputRef.current) {
+            const color = errorMessage !== undefined && errorMessage !== null ? "var(--destructive)": "var(--info)"
+            inputRef.current ?. setNativeProps(
+                {'style': `border-width: 1px; border-color: ${color}`}
+            ).exec()   ;
+        }
+    }
+
+    const handleFocus = () => {
+        changeBorderColor()
+    }
+
+    const handleBlur = () => {
+        if (inputRef.current) {
+            inputRef.current ?. setNativeProps(
+                {'style': ``}
+            ).exec();
+        }
     }
 
     const handleInput = (e : any) => {
@@ -81,6 +113,7 @@ export const Input = (props : InputComponentsProps) => {
         } else {
             setErrorMessage(null);
         }
+        changeBorderColor()
         onChange ?. (e.detail.value as string | number);
     };
 
@@ -89,7 +122,8 @@ export const Input = (props : InputComponentsProps) => {
             {
             label !== undefined && label !== null ? renderLabel() : <></>
         }
-            <view class="flex items-center justify-center flex-row border rounded-lg px-2 py-2 shadow-sm pe-10 sm:text-sm gap-2">
+            <view ref={inputRef}
+                class="flex items-center justify-center flex-row border rounded-lg px-2 py-2 shadow-sm pe-10 sm:text-sm gap-2">
                 {
                 renderInput()
             }
