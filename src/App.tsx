@@ -108,7 +108,7 @@ export function App(props: {
         >
         <view className='Content px-4'>
           <view className='flex flex-col gap-2 py-8 px-4'>
-            <Loader type="spinner" label="test" properties={{ spinner: { size: 40, colorStroke: '#2779F5', colorFill: '#F54000' } }} onValueChange={() => {}} />
+            <Loader type="spinner" label="test" properties={{ spinner: { size: 40 } }} onValueChange={() => {}} />
             <Loader type="loader" label="test" percentage={50} onValueChange={() => {}} />
             <Alert {...alertProps} />
             <Accordion {...accordion} />
