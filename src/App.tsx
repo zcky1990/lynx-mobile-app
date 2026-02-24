@@ -97,7 +97,19 @@ export function App(props: {
       { title: "SMS Notifications", description: "Receive text messages for important updates.", value: "off" },
     ],
   }
-  
+  const [seconds, setSeconds] = useState(0);
+  useEffect(() => {
+    if (seconds >= 100) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setSeconds(prevSeconds => prevSeconds + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [seconds]);
+
 
   return (
     <view>
@@ -108,8 +120,8 @@ export function App(props: {
         >
         <view className='Content px-4'>
           <view className='flex flex-col gap-2 py-8 px-4'>
-            <Loader type="spinner" label="test" properties={{ spinner: { size: 40 } }} onValueChange={() => {}} />
-            <Loader type="loader" label="test" percentage={50} onValueChange={() => {}} />
+            <Loader type="spinner" label="test" properties={{ spinner: { size: 40 } }}  />
+            <Loader type="loader" label="test" percentage={seconds} />
             <Alert {...alertProps} />
             <Accordion {...accordion} />
             <SettingsNotifications {...settingsNotifications} />

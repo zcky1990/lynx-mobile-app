@@ -24,5 +24,4 @@ export interface LoaderProps {
   label?: String;
   type: LoaderType;
   properties?: LoaderProperties;
-  onValueChange?: () => void;
 }

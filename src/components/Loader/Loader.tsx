@@ -5,8 +5,7 @@ export function Loader(props : LoaderProps) {
         percentage = 0,
         label,
         type,
-        properties,
-        onValueChange
+        properties
     } = props;
 
     const loaderPercentageStyle = {
