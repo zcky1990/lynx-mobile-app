@@ -77,9 +77,7 @@ export const Input = (props : InputComponentsProps) => {
                     () => onPress ?. (currentText)
             }>
                 <Icon name={icon}
-                    size={
-                        properties ?. icon ?. size || 15
-                    }
+                    size={properties ?. icon ?. size || 15}
                     style={iconStyle}/>
             </view>
         );

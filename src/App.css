@@ -95,6 +95,10 @@
   width: 100%;
 }
 
+.currentColor {
+  color: var(--foreground);
+}
+
 .border {
   border-color: var(--border);
 }
