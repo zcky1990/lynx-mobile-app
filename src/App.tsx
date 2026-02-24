@@ -126,6 +126,7 @@ export function App(props: {
             <Input label="Input" 
               placeholder="Input" 
               type="email" interaction="enabled" 
+              icon="email"
               validate={(val:String | number) => {
                 if (!val.toString().includes('@')) return "Format email salah";
                 if (val.toString().length < 5) return "Terlalu pendek";

@@ -28,7 +28,7 @@ export interface InputComponentsProps {
       style?: string;
     };
     icon?: {
-      className?: string;
+      size?: number;
       style?: string;
     };
     errorMessage?: {

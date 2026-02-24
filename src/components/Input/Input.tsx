@@ -1,7 +1,7 @@
 import type {InputComponentsProps}
 from './InputCommon';
 import {useState} from '@lynx-js/react';
-
+import { Icon } from '../Icon/Icon';
 
 export const Input = (props : InputComponentsProps) => {
     const {
@@ -11,7 +11,7 @@ export const Input = (props : InputComponentsProps) => {
         interaction = 'enabled',
         maxlength,
         showIcon = true,
-        icon,
+        icon = 'phone',
         iconPosition = 'left',
         value = '' as string | number,
         onPress,
@@ -66,14 +66,10 @@ export const Input = (props : InputComponentsProps) => {
 
     const renderIcon = () => {
         return (
-            <view className="flex-0" bindtap={
+            <view className="flex items-center justify-center flex-0" bindtap={
                 () => onPress ?. (currentText)
             }>
-                <image src={icon}
-                    className={
-                        properties ?. icon ?. className || 'w-5 h-5'
-                    }
-                    style={ iconStyle }/>
+                <Icon name={icon} size={properties?.icon?.size || 15} style={iconStyle} />
             </view>
         );
     }
@@ -93,7 +89,7 @@ export const Input = (props : InputComponentsProps) => {
             {
             label !== undefined && label !== null ? renderLabel() : <></>
         }
-            <view class="flex flex-row border rounded-lg px-2 py-2 shadow-sm pe-10 sm:text-sm gap-1">
+            <view class="flex items-center justify-center flex-row border rounded-lg px-2 py-2 shadow-sm pe-10 sm:text-sm gap-2">
                 {
                 renderInput()
             }
