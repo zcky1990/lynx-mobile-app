@@ -3,9 +3,6 @@ import { useTheme, useToast } from './providers'
 
 
 import './App.css'
-import arrow from './assets/arrow.png'
-import lynxLogo from './assets/lynx-logo.png'
-import reactLynxLogo from './assets/react-logo.png'
 import { Alert, type AlertProps } from './components/Alert/Alert'
 import type { ToastProps } from './components/Toast/ToastCommon'
 import type { AccordionProps } from './components/Accordion/AccordionCommon'
@@ -18,6 +15,7 @@ import { Card } from './components/Card/Card'
 import { Breadcrumb } from './components/Breadcrumb/Breadcrumb'
 import { Divider } from './components/Divider/Divider'
 import { Checkbox } from './components/Checkbox'
+import { Loader } from './components/Loader/Loader'
 
 
 export function App(props: {
@@ -99,6 +97,7 @@ export function App(props: {
       { title: "SMS Notifications", description: "Receive text messages for important updates.", value: "off" },
     ],
   }
+  
 
   return (
     <view>
@@ -109,6 +108,8 @@ export function App(props: {
         >
         <view className='Content px-4'>
           <view className='flex flex-col gap-2 py-8 px-4'>
+            <Loader type="spinner" label="test" properties={{ spinner: { size: 40, colorStroke: '#2779F5', colorFill: '#F54000' } }} onValueChange={() => {}} />
+            <Loader type="loader" label="test" percentage={50} onValueChange={() => {}} />
             <Alert {...alertProps} />
             <Accordion {...accordion} />
             <SettingsNotifications {...settingsNotifications} />

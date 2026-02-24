@@ -322,7 +322,6 @@
   font-size: 0.75rem;
   font-weight: 700;
   line-height: 1;
-  user-select: none;
 }
 .Checkbox-box:not(.Checkbox-box--checked) .Checkbox-check {
   display: none;
