@@ -182,7 +182,7 @@ export function App(props: {
             <Loader type="spinner" label="test" properties={{ spinner: { size: 40 } }}  />
             <Loader type="loader" label="test" percentage={seconds} />
             <Alert {...alertProps} />
-            <Accordion {...accordion} />
+            <Accordion {...accordion} theme={resolvedTheme} />
             <SettingsNotifications {...settingsNotifications} />
             <view className="flex flex-wrap gap-2 items-center mt-4">
               <Button variant="solid" size="md" onPress={() => toggleToast({ ...toastData, toastVariant: 'success' })}>Primary</Button>
