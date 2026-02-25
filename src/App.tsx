@@ -52,11 +52,6 @@ export function App(props: {
   }, [])
   props.onRender?.()
 
-  const onTap = useCallback(() => {
-    'background only'
-    setAlterLogo(prevAlterLogo => !prevAlterLogo)
-  }, [])
-
   const alertProps: AlertProps = {
     title: 'Alert',
     description: 'This is an alert sadsadasdasdasdasdasdads',

@@ -247,7 +247,6 @@
 .Switch-track {
   display: inline-flex;
   flex-direction: row;
-  align-items: center;
   width: 2.75rem;
   height: 1.5rem;
   min-width: 2.75rem;
@@ -259,6 +258,7 @@
 }
 .Switch-track--on {
   justify-content: flex-end;
+  align-items: end;
   background-color: var(--primary);
 }
 .Switch-track--off {
@@ -266,6 +266,7 @@
   background-color: var(--input);
 }
 .Switch-track[data-value="on"] {
+  align-items: end;
   justify-content: flex-end;
   background-color: var(--primary);
 }
