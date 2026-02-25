@@ -10,7 +10,7 @@ export interface TextAreaComponentsProps {
     interaction?: TextAreaInteraction;
     theme?: "light" | "dark";
     onChange?: (value : string) => void;
-    validate?: (value : string | number) => string | null;
+    validate?: (value : string) => string | null;
     properties?: {
         label?: {
             className?: string;

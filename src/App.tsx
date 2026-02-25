@@ -141,7 +141,7 @@ export function App(props: {
               type="email" interaction="enabled" 
               icon="email"
               theme={resolvedTheme}
-              validate={(val:String | number) => {
+              validate={(val: string | number) => {
                 if (!val.toString().includes('@')) return "Format email salah";
                 if (val.toString().length < 5) return "Terlalu pendek";
                 return null; 
@@ -155,7 +155,7 @@ export function App(props: {
               maxlines={10}
               interaction="enabled" 
               theme={resolvedTheme}
-              validate={(val:String | number) => {
+              validate={(val: string) => {
                 if (!val.toString().includes('@')) return "Format email salah";
                 if (val.toString().length < 5) return "Terlalu pendek";
                 return null; 
