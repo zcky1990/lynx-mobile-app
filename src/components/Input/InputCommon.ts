@@ -1,5 +1,3 @@
-import type { CSSProperties } from "react";
-
 export type InputType = 'text' | 'number' | 'digit' | 'password' | 'tel' | 'email';
 export type InputInteraction = "enabled" | "disabled";
 

@@ -1,6 +1,6 @@
 import type {TextAreaComponentsProps}
 from './TextAreaCommon';
-import {useState} from '@lynx-js/react';
+import {useState, useEffect} from '@lynx-js/react';
 import {useRef} from '@lynx-js/react';
 import type {NodesRef}
 from '@lynx-js/types';
@@ -13,7 +13,7 @@ export const TextArea = (props : TextAreaComponentsProps) => {
         interaction = 'enabled',
         maxlines,
         theme = 'light',
-        value = '' as string | number,
+        value = '' as string,
         onChange,
         validate,
         properties
@@ -22,6 +22,26 @@ export const TextArea = (props : TextAreaComponentsProps) => {
     const [currentText, setCurrentText] = useState(value);
     const [errorMessage, setErrorMessage] = useState < string | null > (null);
     const textAreaRef = useRef < NodesRef > (null);
+
+
+    useEffect(() => {
+        if (textAreaRef.current) {
+            requestAnimationFrame(() => {
+                textAreaRef.current ?. invoke?.({
+                    method: 'setValue',
+                    params: {
+                        value: String(currentText)
+                    },
+                    success: () => {
+                        console.log('setValue success');
+                    },
+                    fail: (error: any) => {
+                        console.log('setValue fail', error);
+                    }
+                }).exec();
+              });
+        }
+    }, []);
 
     const labelStyle: string = properties ?. label ?. style || '';
     const textAreaStyle: string = properties ?. textArea ?. style ? `width:100%;${
@@ -57,7 +77,8 @@ export const TextArea = (props : TextAreaComponentsProps) => {
             placeholder={placeholder}
             bindfocus={handleFocus}
             bindblur={handleBlur}
-            bindinput={handleInput}/>);
+            bindinput={handleInput}
+            />);
     };
 
     const errorMessageClassName = () => {
@@ -88,17 +109,15 @@ export const TextArea = (props : TextAreaComponentsProps) => {
         }
     }
 
-    const handleInput = (e : {
-        detail: {
-            value: string
-        }
-    }) => {
+    const handleInput = (e : any) => {
         const newValue = e.detail.value;
         setCurrentText(newValue);
-        const err = validate ?. (newValue) ?? null;
-        setErrorMessage(err);
-        changeBorderColor();
-        onChange ?. (newValue as string | number);
+        if (validate ?. (newValue) !== null) {
+            setErrorMessage(validate ?. (newValue) ?? null);
+        } else {
+            setErrorMessage(null);
+        } changeBorderColor()
+        onChange ?. (e.detail.value);
     };
 
     return (<view className="flex flex-col gap-2"> {

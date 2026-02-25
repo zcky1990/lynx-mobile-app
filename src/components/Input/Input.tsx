@@ -1,10 +1,11 @@
 import type {InputComponentsProps}
 from './InputCommon';
-import {useState} from '@lynx-js/react';
+import {useState, useEffect} from '@lynx-js/react';
 import {Icon} from '../Icon/Icon';
 import {useRef} from '@lynx-js/react';
 import type {NodesRef}
 from '@lynx-js/types';
+import {twMerge} from 'tailwind-merge'
 
 export const Input = (props : InputComponentsProps) => {
     const {
@@ -27,28 +28,52 @@ export const Input = (props : InputComponentsProps) => {
     const [currentText, setCurrentText] = useState(value);
     const [errorMessage, setErrorMessage] = useState < string | null > (null);
     const inputRef = useRef < NodesRef > (null);
+    const inputValue = useRef < NodesRef > (null);
 
     const labelStyle: string = properties ?. label ?. style || '';
     const inputStyle: string = properties ?. input ?. style || '';
     const iconStyle: string = properties ?. icon ?. style || '';
     const errorMessageStyle: string = properties ?. errorMessage ?. style || '';
 
+    //set value to input
+    useEffect(() => {
+        if (inputValue.current && currentText) {
+            requestAnimationFrame(() => {
+                inputValue.current ?. invoke?.({
+                    method: 'setValue',
+                    params: {
+                        value: String(currentText)
+                    }
+                }).exec();
+            });
+        }
+    }, []);
+
+    const labelClassName = () => {
+        const defaultClassName = 'text-sm font-medium text-foreground'
+        return(properties ?. label ?. className ? twMerge(defaultClassName, properties ?. label ?. className) : defaultClassName)
+    }
+
     const renderLabel = () => {
         return (
             <text className={
-                    properties ?. label ?. className || 'text-sm font-medium text-foreground'
+                    labelClassName()
                 }
                 style={labelStyle}>
                 {label} </text>
         );
     };
 
+    const inputClassName = () => {
+        const defaultClassName = 'mt-0.5 w-full flex-1'
+        return(properties ?. input ?. className ? twMerge(defaultClassName, properties ?. input ?. className) : defaultClassName)
+    }
     const renderInput = () => {
         return (
-            <input maxlength={maxlength}
+            <input ref={inputValue} maxlength={maxlength}
                 style={inputStyle}
                 className={
-                    properties ?. input ?. className || 'mt-0.5 w-full flex-1'
+                    inputClassName()
                 }
                 disabled={
                     interaction !== 'enabled'
@@ -61,10 +86,14 @@ export const Input = (props : InputComponentsProps) => {
         );
     };
 
+    const errorMessageClassName = () => {
+        const defaultClassName = 'text-xs font-medium text-destructive-foreground'
+        return(properties ?. errorMessage ?. className ? twMerge(defaultClassName, properties ?. errorMessage ?. className) : defaultClassName)
+    }
     const renderErrorMessage = () => {
         return (
             <text className={
-                    properties ?. errorMessage ?. className || 'text-xs font-medium text-destructive-foreground'
+                    errorMessageClassName()
                 }
                 style={errorMessageStyle}>
                 {errorMessage} </text>
@@ -77,23 +106,26 @@ export const Input = (props : InputComponentsProps) => {
                 bindtap={
                     () => onPress ?. (currentText)
             }>
-                { theme === 'dark' ? <Icon name={icon}
+                {
+                theme === 'dark' ? <Icon name={icon}
                     color="white"
-                    size={properties ?. icon ?. size || 15}
+                    size={
+                        properties ?. icon ?. size || 15
+                    }
                     style={iconStyle}/> : <Icon name={icon}
                     color="black"
-                    size={properties ?. icon ?. size || 15}
-                    style={iconStyle}/>}
-            </view>
+                    size={
+                        properties ?. icon ?. size || 15
+                    }
+                    style={iconStyle}/>
+            } </view>
         );
     }
 
     const changeBorderColor = () => {
         if (inputRef.current) {
-            const color = errorMessage !== undefined && errorMessage !== null ? "var(--destructive)": "var(--ring)"
-            inputRef.current ?. setNativeProps(
-                {'style': `border-width: 1px; border-color: ${color}`}
-            ).exec()   ;
+            const color = errorMessage !== undefined && errorMessage !== null ? "var(--destructive)" : "var(--ring)"
+            inputRef.current ?. setNativeProps({'style': `border-width: 1px; border-color: ${color}; outline: 0px;`}).exec();
         }
     }
 
@@ -103,9 +135,7 @@ export const Input = (props : InputComponentsProps) => {
 
     const handleBlur = () => {
         if (inputRef.current) {
-            inputRef.current ?. setNativeProps(
-                {'style': ``}
-            ).exec();
+            inputRef.current ?. setNativeProps({'style': ``}).exec();
         }
     }
 
@@ -115,17 +145,14 @@ export const Input = (props : InputComponentsProps) => {
             setErrorMessage(validate ?. (currentText) ?? null);
         } else {
             setErrorMessage(null);
-        }
-        changeBorderColor()
+        } changeBorderColor()
         onChange ?. (e.detail.value as string | number);
     };
 
     const inputStyleClass = () => {
-        return (
-            `flex items-center justify-center flex-row border rounded-lg px-2 py-2 shadow-sm pe-10 sm:text-sm gap-2 ${
-                theme === 'dark' ? 'bg-input' : ''
-            }`
-        )
+        return(`flex items-center justify-center flex-row border rounded-lg px-2 py-2 shadow-sm pe-10 sm:text-sm gap-2 ${
+            theme === 'dark' ? 'bg-input' : ''
+        }`)
     }
 
     return (
@@ -134,7 +161,9 @@ export const Input = (props : InputComponentsProps) => {
             label !== undefined && label !== null ? renderLabel() : <></>
         }
             <view ref={inputRef}
-                class={inputStyleClass()}>
+                class={
+                    inputStyleClass()
+            }>
                 {
                 renderInput()
             }

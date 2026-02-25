@@ -112,8 +112,8 @@ export function App(props: {
     return () => clearInterval(interval);
   }, [seconds]);
 
-  const [inputSample, setInputSample] = useState('')
-  const [textAreaSample, setTextAreaSample] = useState('')
+  const [inputSample, setInputSample] = useState('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...')
+  const [textAreaSample, setTextAreaSample] = useState<string>(`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`)
 
   return (
     <view>
@@ -150,7 +150,7 @@ export function App(props: {
             
             <text>{textAreaSample}</text>
             <TextArea 
-              label="TextArea Sample" 
+              label="TextArea Sample label" 
               placeholder="Text Area Sample" 
               maxlines={10}
               interaction="enabled" 
@@ -160,7 +160,10 @@ export function App(props: {
                 if (val.toString().length < 5) return "Terlalu pendek";
                 return null; 
               }}
-              value={textAreaSample} onChange={(value) => {setTextAreaSample(value as string)}} />
+              value={textAreaSample} onChange={(value:string) => {
+                console.log('TextArea changed', value)
+                setTextAreaSample(value)
+              }} />
 
           <Tabs defaultValue="profile">
             <Tabs.List>
