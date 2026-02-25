@@ -27,11 +27,9 @@ export const Toast = (props : ToastProps & {
                     props.className ? props.className : 'px-4 py-2'
                 } flex items-center justify-center fixed ${
                     getClassToastPosition()
-                } w-full`
+                } w-full z-10`
             }
-            style={
-                {zIndex: 990}
-        }>
+            >
             <view className={
                 `grid gap-0.5 ${
                     getBackgroundColor()

@@ -137,9 +137,9 @@ export function App(props: {
             />
             <Timeline theme={resolvedTheme}>
               <Timeline.Item>
-                <text className="text-xs font-medium text-gray-700">12/02/2025</text>
-                <text className="text-lg font-bold text-gray-900">Kickoff</text>
-                <text className="mt-0.5 text-sm text-gray-700">
+                <text className="text-xs font-medium dark:text-foreground text-gray-700 ">12/02/2025</text>
+                <text className="text-lg font-bold text-gray-900 dark:text-foreground">Kickoff</text>
+                <text className="mt-0.5 text-sm text-gray-700 dark:text-foreground">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga officiis tempora ipsum
                   adipisci tenetur sunt quae exercitationem sed pariatur porro!
                 </text>

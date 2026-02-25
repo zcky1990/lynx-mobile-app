@@ -4,5 +4,6 @@ const lynxPreset = require('@lynx-js/tailwind-preset');
 
 export default {
   presets: [lynxPreset], // Use the preset
+  darkMode: 'class',
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
 };
