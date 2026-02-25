@@ -37,8 +37,11 @@ export function ToastProvider({
       }}
     >
       <>
-      <Toast {...toastState} />
-      <view>{children}</view>
+     
+      <view>
+      <Toast className="px-4 py-2" {...toastState} />
+        {children}
+      </view>
       </>
     </ToastContext.Provider>
   )
