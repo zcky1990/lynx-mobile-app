@@ -99,6 +99,11 @@
   color: var(--foreground);
 }
 
+/*input */
+.bg-input {
+  background-color: color-mix(in oklab, var(--input) 30%, transparent);;
+}
+
 .border {
   border-color: var(--border);
 }

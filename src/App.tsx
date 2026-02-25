@@ -122,11 +122,23 @@ export function App(props: {
         >
         <view className='Content px-4'>
           <view className='flex flex-col gap-2 py-8 px-4'>
+          <text className='text-foreground'>Current: {resolvedTheme}</text>
+            <view bindtap={toggleTheme}>
+              <text className='text-foreground'>Toggle theme</text>
+            </view>
+            <view className='text-foreground' bindtap={() => setTheme('dark')}>
+              <text className='text-foreground'>Dark</text>
+            </view>
+            <view className='text-foreground'bindtap={() => setTheme('light')}>
+              <text className='text-foreground'>Light</text>
+            </view>
+            
             <text>{asd}</text>
             <Input label="Input" 
               placeholder="Input" 
               type="email" interaction="enabled" 
               icon="email"
+              theme={resolvedTheme}
               validate={(val:String | number) => {
                 if (!val.toString().includes('@')) return "Format email salah";
                 if (val.toString().length < 5) return "Terlalu pendek";
@@ -216,16 +228,6 @@ export function App(props: {
               toggleToast({...toastData, toastDuration: 3000, toastVariant: 'error'})
               }}>
               <text className='text-foreground'>SHOW Error TOAST</text>
-            </view>
-            <text className='text-foreground'>Current: {resolvedTheme}</text>
-            <view bindtap={toggleTheme}>
-              <text className='text-foreground'>Toggle theme</text>
-            </view>
-            <view className='text-foreground' bindtap={() => setTheme('dark')}>
-              <text className='text-foreground'>Dark</text>
-            </view>
-            <view className='text-foreground'bindtap={() => setTheme('light')}>
-              <text className='text-foreground'>Light</text>
             </view>
           </view>
         </view>

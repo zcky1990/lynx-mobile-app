@@ -15,6 +15,7 @@ export interface InputComponentsProps {
   showIcon?: boolean;
   icon?: string;
   iconPosition?: 'left' | 'right';
+  theme?: 'light' | 'dark';
   onPress?: (value:string|number) => void;
   onChange?: (value:string|number) => void;
   validate?:(value:string|number) => string | null;

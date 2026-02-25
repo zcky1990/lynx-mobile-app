@@ -16,6 +16,7 @@ export const Input = (props : InputComponentsProps) => {
         showIcon = true,
         icon = 'phone',
         iconPosition = 'left',
+        theme = 'light',
         value = '' as string | number,
         onPress,
         onChange,
@@ -76,16 +77,20 @@ export const Input = (props : InputComponentsProps) => {
                 bindtap={
                     () => onPress ?. (currentText)
             }>
-                <Icon name={icon}
+                { theme === 'dark' ? <Icon name={icon}
+                    color="white"
                     size={properties ?. icon ?. size || 15}
-                    style={iconStyle}/>
+                    style={iconStyle}/> : <Icon name={icon}
+                    color="black"
+                    size={properties ?. icon ?. size || 15}
+                    style={iconStyle}/>}
             </view>
         );
     }
 
     const changeBorderColor = () => {
         if (inputRef.current) {
-            const color = errorMessage !== undefined && errorMessage !== null ? "var(--destructive)": "var(--info)"
+            const color = errorMessage !== undefined && errorMessage !== null ? "var(--destructive)": "var(--ring)"
             inputRef.current ?. setNativeProps(
                 {'style': `border-width: 1px; border-color: ${color}`}
             ).exec()   ;
@@ -115,13 +120,21 @@ export const Input = (props : InputComponentsProps) => {
         onChange ?. (e.detail.value as string | number);
     };
 
+    const inputStyleClass = () => {
+        return (
+            `flex items-center justify-center flex-row border rounded-lg px-2 py-2 shadow-sm pe-10 sm:text-sm gap-2 ${
+                theme === 'dark' ? 'bg-input' : ''
+            }`
+        )
+    }
+
     return (
         <view className="flex flex-col gap-2">
             {
             label !== undefined && label !== null ? renderLabel() : <></>
         }
             <view ref={inputRef}
-                class="flex items-center justify-center flex-row border rounded-lg px-2 py-2 shadow-sm pe-10 sm:text-sm gap-2">
+                class={inputStyleClass()}>
                 {
                 renderInput()
             }
