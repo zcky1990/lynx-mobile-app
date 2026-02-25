@@ -35,11 +35,11 @@ export const Input = (props : InputComponentsProps) => {
     const iconStyle: string = properties ?. icon ?. style || '';
     const errorMessageStyle: string = properties ?. errorMessage ?. style || '';
 
-    //set value to input
+    // set value to input
     useEffect(() => {
         if (inputValue.current && currentText) {
             requestAnimationFrame(() => {
-                inputValue.current ?. invoke?.({
+                inputValue.current ?. invoke ?. ({
                     method: 'setValue',
                     params: {
                         value: String(currentText)
@@ -70,7 +70,8 @@ export const Input = (props : InputComponentsProps) => {
     }
     const renderInput = () => {
         return (
-            <input ref={inputValue} maxlength={maxlength}
+            <input ref={inputValue}
+                maxlength={maxlength}
                 style={inputStyle}
                 className={
                     inputClassName()
@@ -139,7 +140,11 @@ export const Input = (props : InputComponentsProps) => {
         }
     }
 
-    const handleInput = (e : any) => {
+    const handleInput = (e : {
+        detail: {
+            value: string
+        }
+    }) => {
         setCurrentText(e.detail.value);
         if (validate ?. (currentText) !== null) {
             setErrorMessage(validate ?. (currentText) ?? null);

@@ -109,7 +109,7 @@ export const TextArea = (props : TextAreaComponentsProps) => {
         }
     }
 
-    const handleInput = (e : any) => {
+    const handleInput = (e : {detail: {value: string}}) => {
         const newValue = e.detail.value;
         setCurrentText(newValue);
         if (validate ?. (newValue) !== null) {
