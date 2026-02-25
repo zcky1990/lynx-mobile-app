@@ -116,10 +116,10 @@ export function App(props: {
       <view className='Background' />
       <view className='App bg-background'>
         <scroll-view scroll-orientation="vertical"
-        style={{ width: "100%", height: "100vh", paddingLeft: "5px", borderRadius: "10px" }}
+        style={{ width: "100%", height: "100vh" }}
         >
         <view className='Content px-4'>
-          <view className='flex flex-col gap-2 py-8 px-4'>
+          <view className='flex flex-col gap-2 py-8'>
           <text className='text-foreground'>Current: {resolvedTheme}</text>
             <view bindtap={toggleTheme}>
               <text className='text-foreground'>Toggle theme</text>
