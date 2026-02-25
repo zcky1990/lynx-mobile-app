@@ -18,6 +18,7 @@ import { Checkbox } from './components/Checkbox'
 import { Loader } from './components/Loader/Loader'
 import { Tabs } from './components/Tabs'
 import { Input } from './components/Input/Input'
+import { TextArea } from './components/TextArea/TextArea'
 
 export function App(props: {
   onRender?: () => void
@@ -111,7 +112,8 @@ export function App(props: {
     return () => clearInterval(interval);
   }, [seconds]);
 
-  const [asd, setAsd] = useState('')
+  const [inputSample, setInputSample] = useState('')
+  const [textAreaSample, setTextAreaSample] = useState('')
 
   return (
     <view>
@@ -132,8 +134,8 @@ export function App(props: {
             <view className='text-foreground'bindtap={() => setTheme('light')}>
               <text className='text-foreground'>Light</text>
             </view>
-            
-            <text>{asd}</text>
+
+            <text>{inputSample}</text>
             <Input label="Input" 
               placeholder="Input" 
               type="email" interaction="enabled" 
@@ -144,7 +146,21 @@ export function App(props: {
                 if (val.toString().length < 5) return "Terlalu pendek";
                 return null; 
               }}
-              value={asd} onChange={(value) => {setAsd(value as string)}} onPress={(value) => {console.log('Input pressed ', value)}} />
+              value={inputSample} onChange={(value) => {setInputSample(value as string)}} onPress={(value) => {console.log('Input pressed ', value)}} />
+            
+            <text>{textAreaSample}</text>
+            <TextArea 
+              label="TextArea Sample" 
+              placeholder="Text Area Sample" 
+              maxlines={10}
+              interaction="enabled" 
+              theme={resolvedTheme}
+              validate={(val:String | number) => {
+                if (!val.toString().includes('@')) return "Format email salah";
+                if (val.toString().length < 5) return "Terlalu pendek";
+                return null; 
+              }}
+              value={textAreaSample} onChange={(value) => {setTextAreaSample(value as string)}} />
 
           <Tabs defaultValue="profile">
             <Tabs.List>

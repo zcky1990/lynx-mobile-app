@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@lynx-js/react": "^0.116.2",
-    "lucide-react": "^0.563.0"
+    "lucide-react": "^0.563.0",
+    "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.3",
