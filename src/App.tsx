@@ -20,6 +20,7 @@ import { Tabs } from './components/Tabs'
 import { Input } from './components/Input/Input'
 import { TextArea } from './components/TextArea/TextArea'
 import { Switch } from './components/Switch/Switch'
+import { Timeline } from './components/Timeline/TimeLine'
 
 export function App(props: {
   onRender?: () => void
@@ -134,6 +135,24 @@ export function App(props: {
                 }
               }}
             />
+            <Timeline>
+              <Timeline.Item>
+                <text className="text-xs font-medium text-gray-700">12/02/2025</text>
+                <text className="text-lg font-bold text-gray-900">Kickoff</text>
+                <text className="mt-0.5 text-sm text-gray-700">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga officiis tempora ipsum
+                  adipisci tenetur sunt quae exercitationem sed pariatur porro!
+                </text>
+              </Timeline.Item>
+              <Timeline.Item>
+                <text className="text-xs font-medium text-gray-700">12/02/2025</text>
+                <text className="text-lg font-bold text-gray-900">Kickoff</text>
+                <text className="mt-0.5 text-sm text-gray-700">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga officiis tempora ipsum
+                  adipisci tenetur sunt quae exercitationem sed pariatur porro!
+                </text>
+              </Timeline.Item>
+            </Timeline>
             <text className='text-foreground'>{inputSample}</text>
             <Input label="Input" 
               placeholder="Input" 
