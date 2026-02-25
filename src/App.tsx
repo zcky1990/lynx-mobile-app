@@ -19,6 +19,7 @@ import { Loader } from './components/Loader/Loader'
 import { Tabs } from './components/Tabs'
 import { Input } from './components/Input/Input'
 import { TextArea } from './components/TextArea/TextArea'
+import { Switch } from './components/Switch/Switch'
 
 export function App(props: {
   onRender?: () => void
@@ -123,14 +124,17 @@ export function App(props: {
             <view bindtap={toggleTheme}>
               <text className='text-foreground'>Toggle theme</text>
             </view>
-            <view className='text-foreground' bindtap={() => setTheme('dark')}>
-              <text className='text-foreground'>Dark</text>
-            </view>
-            <view className='text-foreground'bindtap={() => setTheme('light')}>
-              <text className='text-foreground'>Light</text>
-            </view>
-
-            <text>{inputSample}</text>
+            <Switch
+              value={resolvedTheme === 'dark' ? 'on' : 'off'}
+              onValueChange={(value: any) => {
+                if (value === 'on') {
+                  setTheme('dark')
+                } else {
+                  setTheme('light')
+                }
+              }}
+            />
+            <text className='text-foreground'>{inputSample}</text>
             <Input label="Input" 
               placeholder="Input" 
               type="email" interaction="enabled" 
@@ -143,7 +147,7 @@ export function App(props: {
               }}
               value={inputSample} onChange={(value) => {setInputSample(value as string)}} onPress={(value) => {console.log('Input pressed ', value)}} />
             
-            <text>{textAreaSample}</text>
+            <text className='text-foreground'>{textAreaSample}</text>
             <TextArea 
               label="TextArea Sample label" 
               placeholder="Text Area Sample" 
