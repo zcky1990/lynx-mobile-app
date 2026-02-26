@@ -22,6 +22,7 @@ import { TextArea } from './components/TextArea/TextArea'
 import { Switch } from './components/Switch/Switch'
 import { Timeline } from './components/Timeline/TimeLine'
 import { Dropdown } from './components/Dropdown'
+import { Table } from './components/Table'
 
 
 export function App(props: {
@@ -120,6 +121,16 @@ export function App(props: {
     { id: '3', label: 'Delete', onSelect: () => {} },
   ]
 
+  const columns = [
+    { key: 'name', label: 'Name' },
+    { key: 'email', label: 'Email' },
+    { key: 'role', label: 'Role' },
+  ]
+  const rows = [
+    { name: 'Jane', email: 'jane@example.com', role: 'Admin' },
+    { name: 'John', email: 'john@example.com', role: 'User' },
+  ]
+
   return (
     <view>
       <view className='Background' />
@@ -191,25 +202,32 @@ export function App(props: {
                 setTextAreaSample(value)
               }} />
 
-<Dropdown
-  triggerLabel="Options"
-  items={items}
-/>
-
-<Dropdown triggerLabel="Options" items={items} />
-
-<Dropdown triggerLabel="Options" items={items} theme={resolvedTheme} />
-
-<Dropdown triggerLabel="Actions" variant="divided" items={items} />
-
-<Dropdown
-  triggerLabel="Settings"
-  variant="grouped"
-  groups={[
-    { label: 'Account', items: [{ id: 'a1', label: 'Profile' }, { id: 'a2', label: 'Security' }] },
-    { label: 'App', items: [{ id: 'b1', label: 'Notifications' }] },
-  ]}
-/>
+          <Table columns={columns} rows={rows} />
+          <Table columns={columns} rows={rows} variant="bordered" />
+          <Table columns={columns} rows={rows} variant="striped" />
+          <Table
+            columns={columns}
+            rows={rows}
+            variant="striped"
+            stickyHeader
+            stickyFirstColumn
+          />
+          <Table columns={columns} rows={rows} theme={resolvedTheme} />
+          <Dropdown
+            triggerLabel="Options"
+            items={items}
+          />
+          <Dropdown triggerLabel="Options" items={items} />
+          <Dropdown triggerLabel="Options" items={items} theme={resolvedTheme} />
+          <Dropdown triggerLabel="Actions" variant="divided" items={items} />
+          <Dropdown
+            triggerLabel="Settings"
+            variant="grouped"
+            groups={[
+              { label: 'Account', items: [{ id: 'a1', label: 'Profile' }, { id: 'a2', label: 'Security' }] },
+              { label: 'App', items: [{ id: 'b1', label: 'Notifications' }] },
+            ]}
+          />
 
           <Tabs defaultValue="profile">
             <Tabs.List>
