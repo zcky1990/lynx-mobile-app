@@ -21,6 +21,8 @@ import { Input } from './components/Input/Input'
 import { TextArea } from './components/TextArea/TextArea'
 import { Switch } from './components/Switch/Switch'
 import { Timeline } from './components/Timeline/TimeLine'
+import { Dropdown } from './components/Dropdown'
+
 
 export function App(props: {
   onRender?: () => void
@@ -112,6 +114,12 @@ export function App(props: {
   const [inputSample, setInputSample] = useState('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...')
   const [textAreaSample, setTextAreaSample] = useState<string>(`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`)
 
+  const items = [
+    { id: '1', label: 'Edit', onSelect: () => {} },
+    { id: '2', label: 'Duplicate', onSelect: () => {} },
+    { id: '3', label: 'Delete', onSelect: () => {} },
+  ]
+
   return (
     <view>
       <view className='Background' />
@@ -182,6 +190,26 @@ export function App(props: {
                 console.log('TextArea changed', value)
                 setTextAreaSample(value)
               }} />
+
+<Dropdown
+  triggerLabel="Options"
+  items={items}
+/>
+
+<Dropdown triggerLabel="Options" items={items} />
+
+<Dropdown triggerLabel="Options" items={items} theme={resolvedTheme} />
+
+<Dropdown triggerLabel="Actions" variant="divided" items={items} />
+
+<Dropdown
+  triggerLabel="Settings"
+  variant="grouped"
+  groups={[
+    { label: 'Account', items: [{ id: 'a1', label: 'Profile' }, { id: 'a2', label: 'Security' }] },
+    { label: 'App', items: [{ id: 'b1', label: 'Notifications' }] },
+  ]}
+/>
 
           <Tabs defaultValue="profile">
             <Tabs.List>
