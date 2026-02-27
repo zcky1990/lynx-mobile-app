@@ -48,6 +48,8 @@ This document describes how to use all UI components in the Paguyuban Lynx app. 
 17. [TextArea](#textarea)
 18. [Timeline](#timeline)
 19. [Toast](#toast)
+20. [Dialog](#dialog)
+21. [Marketing Sections (SectionContentImage)](#marketing-sections-sectioncontentimage)
 
 ---
 
@@ -672,6 +674,160 @@ setShowToast(true);
   toastPosition="top"
   toastDuration={3000}
 />
+```
+
+---
+
+## Dialog
+
+Modal dialog with a composition API similar to Tabs: **Dialog** (root), **Dialog.Trigger**, **Dialog.Content**, **Dialog.Close**. Use for confirmations, forms, or any overlay content.
+
+**Import:** `import { Dialog } from './components/Dialog'`
+
+### Usage
+
+- **Dialog** — Root. Manages open state. Props: `children`, `open?` (controlled), `onOpenChange?`, `defaultOpen?`, `className?`.
+- **Dialog.Trigger** — Wraps the element that opens the dialog (e.g. a Button). Props: `children`, `className?`.
+- **Dialog.Content** — The overlay and panel; rendered only when open. Props: `children`, `closeOnBackdropPress?` (default `true`), `overlayClassName?`, `className?`, `style?`.
+- **Dialog.Close** — Wraps the element that closes the dialog (e.g. a button). Props: `children`, `className?`.
+
+### Props (summary)
+
+| Component | Key props |
+|----------|-----------|
+| **Dialog** | `defaultOpen?`, `open?`, `onOpenChange?` |
+| **Dialog.Trigger** | `children` |
+| **Dialog.Content** | `children`, `closeOnBackdropPress?`, `overlayClassName?`, `className?` |
+| **Dialog.Close** | `children` |
+
+### Example
+
+```tsx
+<Dialog>
+  <Dialog.Trigger>
+    <Button variant="solid" onPress={() => {}}>Open dialog</Button>
+  </Dialog.Trigger>
+  <Dialog.Content>
+    <view className="p-4 flex flex-col gap-4">
+      <text className="text-lg font-semibold text-foreground">Dialog title</text>
+      <text className="text-muted-foreground">Dialog body. Tap outside or use the button to close.</text>
+      <view className="flex flex-row gap-2 justify-end">
+        <Dialog.Close>
+          <Button variant="outline" size="sm">Cancel</Button>
+        </Dialog.Close>
+        <Dialog.Close>
+          <Button variant="solid" size="sm">Confirm</Button>
+        </Dialog.Close>
+      </view>
+    </view>
+  </Dialog.Content>
+</Dialog>
+```
+
+### Controlled example
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Dialog open={open} onOpenChange={setOpen}>
+  <Dialog.Trigger>
+    <Button variant="solid">Open</Button>
+  </Dialog.Trigger>
+  <Dialog.Content closeOnBackdropPress>
+    <view className="p-4">
+      <text className="font-medium">Controlled dialog</text>
+      <Dialog.Close><Button variant="ghost">Close</Button></Dialog.Close>
+    </view>
+  </Dialog.Content>
+</Dialog>
+```
+
+---
+
+## Marketing Sections (SectionContentImage)
+
+Section layouts for marketing or landing content: **content + image** in configurable grids. Inspired by [HyperUI Sections](https://www.hyperui.dev/components/marketing/sections) (content with image, 1/2 grid; 2/3 grid; 3/2 grid; vertical split).
+
+**Import:** `import { SectionContentImage } from './components/Sections'` or `from './components/Sections/index'`
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `layout` | `'half' \| 'twoThird' \| 'thirdTwo' \| 'vertical'` | `'half'` | **half** = 1/2–1/2 grid; **twoThird** = 2/3 content, 1/3 image; **thirdTwo** = 1/3 content, 2/3 image; **vertical** = stacked (content then image) |
+| `order` | `'contentFirst' \| 'imageFirst'` | `'contentFirst'` | On horizontal layouts: content on left or image on left |
+| `title` | `string` | — | Section heading |
+| `subtitle` | `string` | — | Optional lead text above title |
+| `description` | `string` | — | Body text |
+| `ctaLabel` | `string` | — | CTA button label (uses `Button` internally) |
+| `onCtaPress` | `() => void` | — | CTA press handler |
+| `imageSrc` | `string` | — | Image URL or asset |
+| `imageAlt` | `string` | — | Alt text for image (optional) |
+| `children` | `React.ReactNode` | — | Custom content (overrides title/description/cta) |
+| `className` | `string` | — | Root container class |
+| `contentClassName` | `string` | — | Content block class |
+| `imageClassName` | `string` | — | Image wrapper class |
+| `properties` | object | — | `container`, `content`, `image`: `{ className?, style? }` |
+
+### Example — 1/2 grid (content left, image right)
+
+```tsx
+<SectionContentImage
+  layout="half"
+  order="contentFirst"
+  title="Build something great"
+  subtitle="Marketing"
+  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  ctaLabel="Get started"
+  onCtaPress={() => {}}
+  imageSrc="https://example.com/hero.jpg"
+/>
+```
+
+### Example — 2/3 grid (content 2/3, image 1/3)
+
+```tsx
+<SectionContentImage
+  layout="twoThird"
+  title="About us"
+  description="Our story and mission."
+  ctaLabel="Learn more"
+  onCtaPress={() => {}}
+  imageSrc="/assets/about.jpg"
+/>
+```
+
+### Example — 3/2 grid (content 1/3, image 2/3)
+
+```tsx
+<SectionContentImage
+  layout="thirdTwo"
+  order="imageFirst"
+  title="Visual first"
+  description="Big image, compact copy."
+  imageSrc="/assets/visual.jpg"
+/>
+```
+
+### Example — Vertical split (stacked)
+
+```tsx
+<SectionContentImage
+  layout="vertical"
+  title="Mobile-friendly section"
+  description="Content on top, image below."
+  imageSrc="/assets/mobile.jpg"
+/>
+```
+
+### Example — Custom content via children
+
+```tsx
+<SectionContentImage layout="half" imageSrc="/hero.jpg">
+  <text className="text-xl font-bold">Custom heading</text>
+  <text className="text-muted-foreground">Custom body and buttons below.</text>
+  <Button variant="outline" onPress={() => {}}>Secondary</Button>
+</SectionContentImage>
 ```
 
 ---

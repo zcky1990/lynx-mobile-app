@@ -23,7 +23,8 @@ import { Switch } from './components/Switch/Switch'
 import { Timeline } from './components/Timeline/TimeLine'
 import { Dropdown } from './components/Dropdown'
 import { Table } from './components/Table'
-
+import { SectionContentImage } from './components/Sections'
+import { Dialog } from './components/Dialog'
 
 export function App(props: {
   onRender?: () => void
@@ -112,6 +113,7 @@ export function App(props: {
     return () => clearInterval(interval);
   }, [seconds]);
 
+  const [dialogOpen, setDialogOpen] = useState(false)
   const [inputSample, setInputSample] = useState('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...')
   const [textAreaSample, setTextAreaSample] = useState<string>(`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`)
 
@@ -252,10 +254,27 @@ export function App(props: {
               <Button variant="solid" size="md" onPress={() => toggleToast({ ...toastData, toastVariant: 'success' })}>Primary</Button>
               <Button variant="outline" size="md" onPress={() => {}}>Outline</Button>
               <Button variant="ghost" size="md" onPress={() => {}}>Ghost</Button>
+              <Button variant="solid" size="md" onPress={() => setDialogOpen(true)}>Open dialog</Button>
               <Badge variant="primary">12</Badge>
               <Badge variant="success">New</Badge>
               <Badge variant="outline">Draft</Badge>
             </view>
+            <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+              <Dialog.Content>
+                <view className="p-4 flex flex-col gap-4">
+                  <text className="text-lg font-semibold text-foreground">Dialog title</text>
+                  <text className="text-muted-foreground">Dialog body. Tap outside or use the button to close.</text>
+                  <view className="flex flex-row gap-2 justify-end">
+                    <Dialog.Close>
+                      <Button variant="outline" size="sm">Cancel</Button>
+                    </Dialog.Close>
+                    <Dialog.Close>
+                      <Button variant="solid" size="sm">Confirm</Button>
+                    </Dialog.Close>
+                  </view>
+                </view>
+              </Dialog.Content>
+            </Dialog>
             <Card className="mt-4">
               <Card.Header>
                 <text className="font-semibold text-foreground">Card title</text>
@@ -270,6 +289,27 @@ export function App(props: {
                 </view>
               </Card.Footer>
             </Card>
+            <view className="mt-8 flex flex-col gap-8">
+              <text className="text-sm font-medium text-foreground">Marketing Sections (SectionContentImage)</text>
+              <SectionContentImage
+                layout="half"
+                order="contentFirst"
+                subtitle="Marketing"
+                title="Build something great"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                ctaLabel="Get started"
+                onCtaPress={() => {}}
+                imageSrc="https://placehold.co/400x300/f3f4f6/9ca3af?text=Section+image"
+              />
+              <SectionContentImage
+                layout="vertical"
+                title="Vertical split section"
+                description="Content on top, image below. Ideal for mobile-first layouts."
+                ctaLabel="Learn more"
+                onCtaPress={() => {}}
+                imageSrc="https://placehold.co/600x200/e5e7eb/6b7280?text=Vertical+image"
+              />
+            </view>
             <view className="mt-4 flex flex-col gap-3">
               <text className="text-sm font-medium text-foreground">Breadcrumbs</text>
               <Breadcrumb
