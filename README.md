@@ -31,26 +31,26 @@ This document describes how to use all UI components in the Paguyuban Lynx app. 
 
 1. [Alert](#alert)
 2. [Accordion](#accordion)
-3. [Badge](#badge)
-4. [Breadcrumb](#breadcrumb)
-5. [Button](#button)
-6. [Card](#card)
-7. [Checkbox](#checkbox)
-8. [Divider](#divider)
-9. [Dropdown](#dropdown)
-10. [Icon](#icon)
-11. [Input](#input)
-12. [Loader](#loader)
-13. [SettingsNotifications](#settingsnotifications)
-14. [Switch](#switch)
-15. [Tabs](#tabs)
-16. [Table](#table)
-17. [TextArea](#textarea)
-18. [Timeline](#timeline)
-19. [Toast](#toast)
-20. [Dialog](#dialog)
-21. [Drawer](#drawer)
-22. [Marketing Sections (SectionContentImage)](#marketing-sections-sectioncontentimage)
+3. [Avatar](#avatar)
+4. [Badge](#badge)
+5. [Breadcrumb](#breadcrumb)
+6. [Button](#button)
+8. [Checkbox](#checkbox)
+9. [Divider](#divider)
+10. [Dropdown](#dropdown)
+11. [Icon](#icon)
+12. [Input](#input)
+13. [Loader](#loader)
+14. [SettingsNotifications](#settingsnotifications)
+15. [Switch](#switch)
+16. [Tabs](#tabs)
+17. [Table](#table)
+18. [TextArea](#textarea)
+19. [Timeline](#timeline)
+20. [Toast](#toast)
+21. [Dialog](#dialog)
+22. [Drawer](#drawer)
+23. [Marketing Sections (SectionContentImage)](#marketing-sections-sectioncontentimage)
 
 ---
 
@@ -119,6 +119,51 @@ Section with a title, description, and a list of expandable items (title + descr
     { title: 'What is this?', description: 'An accordion item.', open: false },
     { title: 'Another item', description: 'More content.', open: true },
   ]}
+/>
+```
+
+---
+
+## Avatar
+
+User avatar image with fallback to a user icon when the image is missing or fails to load. **Avatar.Group** renders multiple avatars with optional overlap and "+N" overflow.
+
+**Import:** `import { Avatar } from './components/Avatar'`
+
+### Avatar props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string \| null` | — | Image URL or asset. When missing or on error, user icon is shown. |
+| `alt` | `string` | — | Alt text for the image |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | sm = 32px, md = 40px, lg = 56px |
+| `className` | `string` | — | Extra class for root |
+
+### Avatar.Group props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `AvatarGroupItem[]` | — | List of `{ src?, alt? }` |
+| `maxCount` | `number` | `0` | Max avatars to show before "+N"; 0 = show all |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size for each avatar |
+| `className` | `string` | — | Extra class for container |
+
+### Example
+
+```tsx
+<Avatar src="https://example.com/photo.jpg" size="md" />
+<Avatar src={null} size="lg" />
+<Avatar size="sm" />
+
+<Avatar.Group
+  items={[
+    { src: 'https://example.com/a.jpg' },
+    { src: 'https://example.com/b.jpg' },
+    { src: null },
+    { src: 'https://example.com/d.jpg' },
+  ]}
+  maxCount={3}
+  size="md"
 />
 ```
 

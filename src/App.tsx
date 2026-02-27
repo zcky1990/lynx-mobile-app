@@ -26,6 +26,7 @@ import { Table } from './components/Table'
 import { SectionContentImage } from './components/Sections'
 import { Dialog } from './components/Dialog'
 import { Drawer } from './components/Drawer'
+import { Avatar } from './components/Avatar'
 
 export function App(props: {
   onRender?: () => void
@@ -303,6 +304,28 @@ export function App(props: {
                 </view>
               </Card.Footer>
             </Card>
+            <view className="mt-4 flex flex-col gap-3">
+              <text className="text-sm font-medium text-foreground">Avatar & Avatar.Group</text>
+              <view className="flex flex-row items-center gap-4 flex-wrap">
+                <Avatar src="https://placehold.co/80/6366f1/fff?text=U" size="sm" theme={resolvedTheme} />
+                <Avatar src="https://placehold.co/80/6366f1/fff?text=U" size="md" theme={resolvedTheme} />
+                <Avatar src="https://placehold.co/80/6366f1/fff?text=U" size="lg" theme={resolvedTheme} />
+                <Avatar src={null} size="lg" theme={resolvedTheme} />
+                <Avatar size="lg" theme={resolvedTheme} />
+              </view>
+              <Avatar.Group
+                items={[
+                  { src: 'https://placehold.co/80/6366f1/fff?text=1' },
+                  { src: 'https://placehold.co/80/8b5cf6/fff?text=2' },
+                  { src: null },
+                  { src: 'https://placehold.co/80/a855f7/fff?text=4' },
+                  { src: 'https://placehold.co/80/c084fc/fff?text=5' },
+                ]}
+                maxCount={3}
+                size="md"
+                theme={resolvedTheme}
+              />
+            </view>
             <view className="mt-8 flex flex-col gap-8">
               <text className="text-sm font-medium text-foreground">Marketing Sections (SectionContentImage)</text>
               <SectionContentImage
