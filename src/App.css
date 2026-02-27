@@ -365,3 +365,94 @@
 .Checkbox-box:not(.Checkbox-box--checked) .Checkbox-check {
   display: none;
 }
+
+/* Drawer: slide-in / slide-out animations */
+@keyframes Drawer-overlay-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes Drawer-overlay-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes Drawer-panel-enter-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes Drawer-panel-exit-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes Drawer-panel-enter-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes Drawer-panel-exit-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes Drawer-panel-enter-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes Drawer-panel-exit-bottom {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.Drawer-overlay {
+  animation: Drawer-overlay-enter 0.25s ease-out forwards;
+}
+.Drawer-overlay--exit {
+  animation: Drawer-overlay-exit 0.25s ease-in forwards;
+}
+.Drawer-panel--enter-right {
+  animation: Drawer-panel-enter-right 0.3s ease-out forwards;
+}
+.Drawer-panel--exit-right {
+  animation: Drawer-panel-exit-right 0.3s ease-in forwards;
+}
+.Drawer-panel--enter-left {
+  animation: Drawer-panel-enter-left 0.3s ease-out forwards;
+}
+.Drawer-panel--exit-left {
+  animation: Drawer-panel-exit-left 0.3s ease-in forwards;
+}
+.Drawer-panel--enter-bottom {
+  animation: Drawer-panel-enter-bottom 0.3s ease-out forwards;
+}
+.Drawer-panel--exit-bottom {
+  animation: Drawer-panel-exit-bottom 0.3s ease-in forwards;
+}

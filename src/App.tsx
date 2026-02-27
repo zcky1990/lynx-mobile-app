@@ -25,6 +25,7 @@ import { Dropdown } from './components/Dropdown'
 import { Table } from './components/Table'
 import { SectionContentImage } from './components/Sections'
 import { Dialog } from './components/Dialog'
+import { Drawer } from './components/Drawer'
 
 export function App(props: {
   onRender?: () => void
@@ -114,6 +115,7 @@ export function App(props: {
   }, [seconds]);
 
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [inputSample, setInputSample] = useState('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...')
   const [textAreaSample, setTextAreaSample] = useState<string>(`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`)
 
@@ -255,6 +257,7 @@ export function App(props: {
               <Button variant="outline" size="md" onPress={() => {}}>Outline</Button>
               <Button variant="ghost" size="md" onPress={() => {}}>Ghost</Button>
               <Button variant="solid" size="md" onPress={() => setDialogOpen(true)}>Open dialog</Button>
+              <Button variant="outline" size="md" onPress={() => setDrawerOpen(true)}>Open drawer</Button>
               <Badge variant="primary">12</Badge>
               <Badge variant="success">New</Badge>
               <Badge variant="outline">Draft</Badge>
@@ -275,6 +278,17 @@ export function App(props: {
                 </view>
               </Dialog.Content>
             </Dialog>
+            <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+              <Drawer.Content side="right">
+                <view className="p-4 flex flex-col gap-4">
+                  <text className="text-lg font-semibold text-foreground">Drawer</text>
+                  <text className="text-muted-foreground">Slide-in panel from the right. Tap outside or close to dismiss.</text>
+                  <Drawer.Close>
+                    <Button variant="solid" size="sm">Close</Button>
+                  </Drawer.Close>
+                </view>
+              </Drawer.Content>
+            </Drawer>
             <Card className="mt-4">
               <Card.Header>
                 <text className="font-semibold text-foreground">Card title</text>

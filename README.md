@@ -49,7 +49,8 @@ This document describes how to use all UI components in the Paguyuban Lynx app. 
 18. [Timeline](#timeline)
 19. [Toast](#toast)
 20. [Dialog](#dialog)
-21. [Marketing Sections (SectionContentImage)](#marketing-sections-sectioncontentimage)
+21. [Drawer](#drawer)
+22. [Marketing Sections (SectionContentImage)](#marketing-sections-sectioncontentimage)
 
 ---
 
@@ -740,6 +741,66 @@ const [open, setOpen] = useState(false);
     </view>
   </Dialog.Content>
 </Dialog>
+```
+
+---
+
+## Drawer
+
+Side or bottom panel that slides in over the content. Same composition pattern as Dialog: **Drawer** (root), **Drawer.Trigger**, **Drawer.Content**, **Drawer.Close**. Use for filters, navigation, or extra actions.
+
+**Import:** `import { Drawer } from './components/Drawer'`
+
+### Usage
+
+- **Drawer** — Root. Manages open state. Props: `children`, `open?` (controlled), `onOpenChange?`, `defaultOpen?`, `className?`.
+- **Drawer.Trigger** — Wraps the element that opens the drawer. Props: `children`, `className?`.
+- **Drawer.Content** — The overlay and sliding panel. Props: `children`, `side?` (`'left' | 'right' | 'bottom'`), `closeOnBackdropPress?` (default `true`), `overlayClassName?`, `className?`, `style?`.
+- **Drawer.Close** — Wraps the element that closes the drawer. Props: `children`, `className?`.
+
+### Props (summary)
+
+| Component | Key props |
+|----------|-----------|
+| **Drawer** | `defaultOpen?`, `open?`, `onOpenChange?` |
+| **Drawer.Trigger** | `children` |
+| **Drawer.Content** | `children`, `side?` (`'left' \| 'right' \| 'bottom'`), `closeOnBackdropPress?`, `overlayClassName?`, `className?` |
+| **Drawer.Close** | `children` |
+
+### Example (trigger inside Drawer)
+
+```tsx
+<Drawer>
+  <Drawer.Trigger>
+    <Button variant="outline">Open drawer</Button>
+  </Drawer.Trigger>
+  <Drawer.Content side="right">
+    <view className="p-4 flex flex-col gap-4">
+      <text className="text-lg font-semibold text-foreground">Drawer</text>
+      <text className="text-muted-foreground">Slide-in panel. Tap outside or close to dismiss.</text>
+      <Drawer.Close>
+        <Button variant="solid" size="sm">Close</Button>
+      </Drawer.Close>
+    </view>
+  </Drawer.Content>
+</Drawer>
+```
+
+### Example (controlled, trigger outside)
+
+```tsx
+const [drawerOpen, setDrawerOpen] = useState(false);
+
+<Button variant="outline" onPress={() => setDrawerOpen(true)}>Open drawer</Button>
+
+<Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+  <Drawer.Content side="bottom">
+    <view className="p-4">
+      <text className="font-medium">Bottom sheet</text>
+      <Drawer.Close><Button variant="ghost">Close</Button></Drawer.Close>
+    </view>
+  </Drawer.Content>
+</Drawer>
 ```
 
 ---
