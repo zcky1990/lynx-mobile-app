@@ -21,44 +21,46 @@ export const Toast = (props : ToastProps & {
 
     return (
         <view className={
-                `${
-                    show ? '' : 'hidden'
-                } ${
-                    props.className ? props.className : 'px-4 py-2'
-                } flex items-center justify-center fixed ${
-                    getClassToastPosition()
-                } w-full z-50`
-            }
-            >
-            <view className="bg-background w-full shadow-md rounded-lg">
-            <view className={
-                `grid gap-0.5 ${
-                    getBackgroundColor()
-                } rounded-lg border ${
-                    getBorderColor()
-                } border-gray-100 shadow-sm px-4 py-3 text-left text-sm relative shadow-sm w-full max-w-lg-full max-w-lg`
+            `${
+                show ? '' : 'hidden'
+            } ${
+                props.className ? props.className : 'px-4 py-2'
+            } flex items-center justify-center fixed ${
+                getClassToastPosition()
+            } w-full z-50`
+        }>
+            <view className="w-full shadow-md rounded-lg"
+                style={
+                    {background: "white"}
             }>
-                <view className="col-span-2 flex items-center justify-between gap-4">
-                    <view className="flex flex-col gap-0.5">
-                        <text className={
-                            `${
-                                getFontColor('title')
-                            } font-medium`
-                        }>
-                            {
-                            props.toastTitle
-                        }</text>
-                        <text className={
-                            `${
-                                getFontColor('body')
-                            } text-sm text-balance md:text-pretty`
-                        }>
-                            {
-                            props.toastDescription
-                        } </text>
+                <view className={
+                    `grid gap-0.5 ${
+                        getBackgroundColor()
+                    } rounded-lg border ${
+                        getBorderColor()
+                    } border-gray-100 shadow-sm px-4 py-3 text-left text-sm relative shadow-sm w-full max-w-lg-full max-w-lg`
+                }>
+                    <view className="col-span-2 flex items-center justify-between gap-4">
+                        <view className="flex flex-col gap-0.5">
+                            <text className={
+                                `${
+                                    getFontColor('title')
+                                } font-medium`
+                            }>
+                                {
+                                props.toastTitle
+                            }</text>
+                            <text className={
+                                `${
+                                    getFontColor('body')
+                                } text-sm text-balance md:text-pretty`
+                            }>
+                                {
+                                props.toastDescription
+                            } </text>
+                        </view>
                     </view>
                 </view>
-            </view>
             </view>
         </view>
     )
