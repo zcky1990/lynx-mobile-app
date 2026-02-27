@@ -27,6 +27,7 @@ import { SectionContentImage } from './components/Sections'
 import { Dialog } from './components/Dialog'
 import { Drawer } from './components/Drawer'
 import { Avatar } from './components/Avatar'
+import { ContactUs } from './components/ContactUs'
 
 export function App(props: {
   onRender?: () => void
@@ -323,6 +324,26 @@ export function App(props: {
                 ]}
                 maxCount={3}
                 size="md"
+                theme={resolvedTheme}
+              />
+            </view>
+            <view className="mt-4 flex flex-col gap-4">
+              <text className="text-sm font-medium text-foreground">Contact Us</text>
+              <ContactUs
+                title="Contact us"
+                description="Get in touch with our team."
+                phone="+1 (555) 123-4567"
+                email="hello@example.com"
+                address="123 Main St, City, Country"
+                ctaLabel="Send message"
+                onCtaPress={() => {}}
+                theme={resolvedTheme}
+              />
+              <ContactUs
+                title="Get in touch"
+                email="support@example.com"
+                ctaLabel="Email us"
+                onCtaPress={() => {}}
                 theme={resolvedTheme}
               />
             </view>

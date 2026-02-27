@@ -50,7 +50,8 @@ This document describes how to use all UI components in the Paguyuban Lynx app. 
 20. [Toast](#toast)
 21. [Dialog](#dialog)
 22. [Drawer](#drawer)
-23. [Marketing Sections (SectionContentImage)](#marketing-sections-sectioncontentimage)
+23. [Contact Us (ContactUs)](#contact-us-contactus)
+24. [Marketing Sections (SectionContentImage)](#marketing-sections-sectioncontentimage)
 
 ---
 
@@ -846,6 +847,61 @@ const [drawerOpen, setDrawerOpen] = useState(false);
     </view>
   </Drawer.Content>
 </Drawer>
+```
+
+---
+
+## Contact Us (ContactUs)
+
+Contact section with optional title, description, phone, email, address, and CTA. Inspired by [PrebuiltUI Contact Us section](https://play.prebuiltui.com/?slug=contact-us-section-43cc). **Each block is only rendered when its prop is provided** (non-empty); if no props are provided, the component returns `null`.
+
+**Import:** `import { ContactUs } from './components/ContactUs'`
+
+### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `title` | `string` | Section heading; not shown when omitted or empty |
+| `description` | `string` | Section description; not shown when omitted or empty |
+| `phone` | `string` | Phone number (with icon); row not shown when omitted or empty |
+| `email` | `string` | Email (with icon); row not shown when omitted or empty |
+| `address` | `string` | Address (with marker); row not shown when omitted or empty |
+| `ctaLabel` | `string` | CTA button label; button not shown when omitted or empty |
+| `onCtaPress` | `() => void` | CTA press handler |
+| `theme` | `'light' \| 'dark'` | Icon color; uses `useTheme().resolvedTheme` when omitted |
+| `className` | `string` | Root container class |
+| `properties` | object | Optional `title`, `description`, `contactItem`, `cta`: `{ className?, style? }` |
+
+### Example (full)
+
+```tsx
+<ContactUs
+  title="Contact us"
+  description="Get in touch with our team."
+  phone="+1 (555) 123-4567"
+  email="hello@example.com"
+  address="123 Main St, City, Country"
+  ctaLabel="Send message"
+  onCtaPress={() => {}}
+  theme={resolvedTheme}
+/>
+```
+
+### Example (partial – only provided fields are shown)
+
+```tsx
+<ContactUs
+  title="Get in touch"
+  email="support@example.com"
+  ctaLabel="Email us"
+  onCtaPress={() => {}}
+/>
+```
+
+### Example (no view – returns null)
+
+```tsx
+<ContactUs />
 ```
 
 ---
