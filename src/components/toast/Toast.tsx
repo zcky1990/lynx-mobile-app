@@ -1,6 +1,5 @@
+import type {ToastProps} from './ToastCommon';
 import {useEffect} from '@lynx-js/react';
-import type {ToastProps}
-from "./ToastCommon"
 import useToast from "./hook/useToast"
 
 export const Toast = (props : ToastProps & {
@@ -29,7 +28,7 @@ export const Toast = (props : ToastProps & {
                 getClassToastPosition()
             } w-full z-50`
         }>
-            <view className="w-full shadow-md rounded-lg"
+            <view className="flex min-w-96 items-center justify-center shadow-md rounded-lg"
                 style={
                     {background: "white"}
             }>

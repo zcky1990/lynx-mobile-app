@@ -4,6 +4,8 @@
 
 /* CAFFEINE*/
 :root {
+  --success: #00ba7b;
+  --success-foreground:#e9faf2;
   --background: #f9f9f9;
   --foreground: #202020;
   --card: #fcfcfc;
