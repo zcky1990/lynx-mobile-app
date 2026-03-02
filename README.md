@@ -371,6 +371,7 @@ Trigger that opens a menu of items. Supports flat list, divided list, or grouped
 | `items` | `DropdownItem[]` | `[]` | Flat/divided menu items |
 | `groups` | `DropdownGroup[]` | `[]` | For `variant="grouped"` |
 | `variant` | `'base' \| 'divided' \| 'grouped'` | `'base'` | Menu layout |
+| `onChange` | `(item: DropdownItem) => void` | — | Called when an item is selected; receives the selected item |
 | `theme` | `'light' \| 'dark'` | from `useTheme()` | Theme |
 | `label` | `string` | — | Label above trigger |
 | `properties` | object | — | Custom classNames/styles for label, trigger, menu, item, divider, groupLabel |
@@ -389,6 +390,7 @@ Trigger that opens a menu of items. Supports flat list, divided list, or grouped
     { id: '1', label: 'Edit', onSelect: () => {} },
     { id: '2', label: 'Delete', onSelect: () => {} },
   ]}
+  onChange={(item) => console.log('Selected:', item.id, item.label)}
 />
 
 // Grouped
@@ -399,6 +401,7 @@ Trigger that opens a menu of items. Supports flat list, divided list, or grouped
     { label: 'Account', items: [{ id: 'a1', label: 'Profile', onSelect: () => {} }] },
     { label: 'Support', items: [{ id: 's1', label: 'Help', onSelect: () => {} }] },
   ]}
+  onChange={(item) => console.log('Selected:', item.id, item.label)}
 />
 ```
 

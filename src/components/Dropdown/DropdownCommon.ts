@@ -21,6 +21,8 @@ export interface DropdownProps {
   groups?: DropdownGroup[];
   /** Variant: base (simple list), divided (with dividers), grouped (sections) */
   variant?: DropdownVariant;
+  /** Called when an item is selected; receives the selected item */
+  onChange?: (item: DropdownItem) => void;
   /** Explicit theme; if not set, component uses useTheme().resolvedTheme */
   theme?: 'light' | 'dark';
   /** Optional label above trigger */

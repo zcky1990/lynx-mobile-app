@@ -10,6 +10,7 @@ export function Dropdown(props: DropdownProps) {
     items = [],
     groups = [],
     variant = 'base',
+    onChange,
     theme: themeProp,
     label,
     properties,
@@ -19,8 +20,10 @@ export function Dropdown(props: DropdownProps) {
   const theme = themeProp ?? resolvedTheme;
 
   const [open, setOpen] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
 
   const isDark = theme === 'dark';
+  const displayLabel = selectedLabel ?? triggerLabel;
 
   const labelClassName = () => {
     const defaultClassName = 'text-sm font-medium text-foreground';
@@ -80,6 +83,8 @@ export function Dropdown(props: DropdownProps) {
   const iconColor = isDark ? 'white' : 'black';
 
   const handleItemSelect = (item: DropdownItem) => () => {
+    setSelectedLabel(item.label);
+    onChange?.(item);
     item.onSelect?.();
     setOpen(false);
   };
@@ -161,7 +166,7 @@ export function Dropdown(props: DropdownProps) {
         style={properties?.trigger?.style}
         bindtap={() => setOpen(!open)}
       >
-        <text className="text-current flex-1 text-left">{triggerLabel}</text>
+        <text className="text-current flex-1 text-left">{displayLabel}</text>
         <view className="flex items-center justify-center flex-shrink-0">
           <Icon
             name={open ? 'chevronUp' : 'chevronDown'}

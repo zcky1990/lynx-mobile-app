@@ -119,6 +119,7 @@ export function App(props: {
 
   const [dialogOpen, setDialogOpen] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [lastDropdownSelection, setLastDropdownSelection] = useState<string | null>(null)
   const [inputSample, setInputSample] = useState('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...')
   const [textAreaSample, setTextAreaSample] = useState<string>(`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`)
 
@@ -220,13 +221,19 @@ export function App(props: {
             stickyFirstColumn
           />
           <Table columns={columns} rows={rows} theme={resolvedTheme} />
+          <view className="flex flex-wrap gap-2 items-center">
+            {lastDropdownSelection != null ? (
+              <text className="text-sm text-muted-foreground">Selected: {lastDropdownSelection}</text>
+            ) : null}
+          </view>
           <Dropdown
             triggerLabel="Options"
             items={items}
+            onChange={(item) => setLastDropdownSelection(item.label)}
           />
           <Dropdown triggerLabel="Options" items={items} />
-          <Dropdown triggerLabel="Options" items={items} theme={resolvedTheme} />
-          <Dropdown triggerLabel="Actions" variant="divided" items={items} />
+          <Dropdown triggerLabel="Options" items={items} theme={resolvedTheme} onChange={(item) => setLastDropdownSelection(item.label)} />
+          <Dropdown triggerLabel="Actions" variant="divided" items={items} onChange={(item) => setLastDropdownSelection(item.label)} />
           <Dropdown
             triggerLabel="Settings"
             variant="grouped"
@@ -234,6 +241,7 @@ export function App(props: {
               { label: 'Account', items: [{ id: 'a1', label: 'Profile' }, { id: 'a2', label: 'Security' }] },
               { label: 'App', items: [{ id: 'b1', label: 'Notifications' }] },
             ]}
+            onChange={(item) => setLastDropdownSelection(item.label)}
           />
 
           <Tabs defaultValue="profile">
