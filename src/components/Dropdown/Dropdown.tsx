@@ -45,7 +45,7 @@ export function Dropdown(props: DropdownProps) {
   };
 
   const menuClassName = () => {
-    const base = 'rounded-lg border shadow-lg mt-1 min-w-[8rem] overflow-hidden';
+    const base = 'absolute top-full left-0 right-0 mt-1 z-50 rounded-lg border shadow-lg min-w-[8rem] overflow-hidden';
     const themeCls = isDark
       ? 'border-border bg-popover text-popover-foreground'
       : 'border-border bg-background';

@@ -79,6 +79,22 @@ const STEPPER_STEPS = [
   { title: "Done", description: "You are all set" },
 ];
 
+type StepperShowcase = "progress" | "stepCounter" | "grouped" | "timeline" | "all";
+type TableShowcase = "default" | "striped" | "both";
+type StatsShowcase = "inline" | "stacked" | "both";
+type AlertShowcase = "info" | "success" | "error" | "warning";
+type BreadcrumbDividerShowcase = "chevron" | "slash" | "both";
+type DividerShowcase = "base" | "gradient" | "both";
+type LoaderShowcase = "spinner" | "progress" | "both";
+
+const STEPPER_LABELS: Record<StepperShowcase, string> = { progress: "Progress", stepCounter: "Step counter", grouped: "Grouped", timeline: "Timeline", all: "All" };
+const TABLE_LABELS: Record<TableShowcase, string> = { default: "Default", striped: "Striped", both: "Both" };
+const STATS_LABELS: Record<StatsShowcase, string> = { inline: "Inline", stacked: "Stacked", both: "Both" };
+const ALERT_LABELS: Record<AlertShowcase, string> = { info: "Info", success: "Success", error: "Error", warning: "Warning" };
+const BREADCRUMB_LABELS: Record<BreadcrumbDividerShowcase, string> = { chevron: "Chevron", slash: "Slash", both: "Both" };
+const DIVIDER_LABELS: Record<DividerShowcase, string> = { base: "Base", gradient: "Gradient", both: "Both" };
+const LOADER_LABELS: Record<LoaderShowcase, string> = { spinner: "Spinner", progress: "Progress", both: "Both" };
+
 export function App(props: { onRender?: () => void }) {
   const { resolvedTheme, setTheme } = useTheme();
   const { toggleToast } = useToast();
@@ -103,6 +119,15 @@ export function App(props: { onRender?: () => void }) {
   const [lastDropdownSelection, setLastDropdownSelection] = useState<string | null>(null);
   const [inputSample, setInputSample] = useState("");
   const [textAreaSample, setTextAreaSample] = useState("");
+
+  const [showcaseStepper, setShowcaseStepper] = useState<StepperShowcase>("all");
+  const [showcaseTable, setShowcaseTable] = useState<TableShowcase>("both");
+  const [showcaseStats, setShowcaseStats] = useState<StatsShowcase>("both");
+  const [showcaseAlert, setShowcaseAlert] = useState<AlertShowcase>("info");
+  const [showcaseBreadcrumbDivider, setShowcaseBreadcrumbDivider] = useState<BreadcrumbDividerShowcase>("both");
+  const [showcaseBreadcrumbHomeIcon, setShowcaseBreadcrumbHomeIcon] = useState(false);
+  const [showcaseDivider, setShowcaseDivider] = useState<DividerShowcase>("both");
+  const [showcaseLoader, setShowcaseLoader] = useState<LoaderShowcase>("both");
 
   useEffect(() => {
     const t = setInterval(() => setSeconds((s) => (s >= 100 ? s : s + 1)), 1000);
@@ -176,6 +201,108 @@ export function App(props: { onRender?: () => void }) {
               </view>
             </Section>
 
+            <Section title="Showcase options">
+              <text className="text-xs text-muted-foreground mb-2">
+                Change options below to compare component variants in the sections underneath.
+              </text>
+              <view className="flex flex-col gap-3">
+                <view className="flex flex-row items-center gap-2 flex-wrap">
+                  <text className="text-sm text-foreground w-20">Stepper</text>
+                  <Dropdown
+                    triggerLabel={STEPPER_LABELS[showcaseStepper]}
+                    items={[
+                      { id: "progress", label: "Progress" },
+                      { id: "stepCounter", label: "Step counter" },
+                      { id: "grouped", label: "Grouped" },
+                      { id: "timeline", label: "Timeline" },
+                      { id: "all", label: "All" },
+                    ]}
+                    onChange={(item) => setShowcaseStepper(item.id as StepperShowcase)}
+                  />
+                </view>
+                <view className="flex flex-row items-center gap-2 flex-wrap">
+                  <text className="text-sm text-foreground w-20">Table</text>
+                  <Dropdown
+                    triggerLabel={TABLE_LABELS[showcaseTable]}
+                    items={[
+                      { id: "default", label: "Default" },
+                      { id: "striped", label: "Striped" },
+                      { id: "both", label: "Both" },
+                    ]}
+                    onChange={(item) => setShowcaseTable(item.id as TableShowcase)}
+                  />
+                </view>
+                <view className="flex flex-row items-center gap-2 flex-wrap">
+                  <text className="text-sm text-foreground w-20">Stats</text>
+                  <Dropdown
+                    triggerLabel={STATS_LABELS[showcaseStats]}
+                    items={[
+                      { id: "inline", label: "Inline" },
+                      { id: "stacked", label: "Stacked" },
+                      { id: "both", label: "Both" },
+                    ]}
+                    onChange={(item) => setShowcaseStats(item.id as StatsShowcase)}
+                  />
+                </view>
+                <view className="flex flex-row items-center gap-2 flex-wrap">
+                  <text className="text-sm text-foreground w-20">Alert</text>
+                  <Dropdown
+                    triggerLabel={ALERT_LABELS[showcaseAlert]}
+                    items={[
+                      { id: "info", label: "Info" },
+                      { id: "success", label: "Success" },
+                      { id: "error", label: "Error" },
+                      { id: "warning", label: "Warning" },
+                    ]}
+                    onChange={(item) => setShowcaseAlert(item.id as AlertShowcase)}
+                  />
+                </view>
+                <view className="flex flex-row items-center gap-2 flex-wrap">
+                  <text className="text-sm text-foreground w-20">Breadcrumb</text>
+                  <Dropdown
+                    triggerLabel={BREADCRUMB_LABELS[showcaseBreadcrumbDivider]}
+                    items={[
+                      { id: "chevron", label: "Chevron" },
+                      { id: "slash", label: "Slash" },
+                      { id: "both", label: "Both" },
+                    ]}
+                    onChange={(item) => setShowcaseBreadcrumbDivider(item.id as BreadcrumbDividerShowcase)}
+                  />
+                  <view className="flex flex-row items-center gap-2">
+                    <text className="text-sm text-foreground">Home icon</text>
+                    <Switch
+                      value={showcaseBreadcrumbHomeIcon ? "on" : "off"}
+                      onValueChange={(v) => setShowcaseBreadcrumbHomeIcon(v === "on")}
+                    />
+                  </view>
+                </view>
+                <view className="flex flex-row items-center gap-2 flex-wrap">
+                  <text className="text-sm text-foreground w-20">Divider</text>
+                  <Dropdown
+                    triggerLabel={DIVIDER_LABELS[showcaseDivider]}
+                    items={[
+                      { id: "base", label: "Base" },
+                      { id: "gradient", label: "Gradient" },
+                      { id: "both", label: "Both" },
+                    ]}
+                    onChange={(item) => setShowcaseDivider(item.id as DividerShowcase)}
+                  />
+                </view>
+                <view className="flex flex-row items-center gap-2 flex-wrap">
+                  <text className="text-sm text-foreground w-20">Loader</text>
+                  <Dropdown
+                    triggerLabel={LOADER_LABELS[showcaseLoader]}
+                    items={[
+                      { id: "spinner", label: "Spinner" },
+                      { id: "progress", label: "Progress" },
+                      { id: "both", label: "Both" },
+                    ]}
+                    onChange={(item) => setShowcaseLoader(item.id as LoaderShowcase)}
+                  />
+                </view>
+              </view>
+            </Section>
+
             <Section title="Forms">
               <Input
                 label="Email"
@@ -244,8 +371,12 @@ export function App(props: { onRender?: () => void }) {
                   onChange={(item) => setLastDropdownSelection(item.label)}
                 />
               </view>
-              <Table columns={TABLE_COLUMNS} rows={TABLE_ROWS} theme={resolvedTheme} />
-              <Table columns={TABLE_COLUMNS} rows={TABLE_ROWS} variant="striped" />
+              {(showcaseTable === "default" || showcaseTable === "both") && (
+                <Table columns={TABLE_COLUMNS} rows={TABLE_ROWS} theme={resolvedTheme} />
+              )}
+              {(showcaseTable === "striped" || showcaseTable === "both") && (
+                <Table columns={TABLE_COLUMNS} rows={TABLE_ROWS} variant="striped" theme={resolvedTheme} />
+              )}
               <Tabs defaultValue="profile">
                 <Tabs.List>
                   <Tabs.Trigger id="profile">Profile</Tabs.Trigger>
@@ -261,9 +392,13 @@ export function App(props: { onRender?: () => void }) {
             </Section>
 
             <Section title="Feedback">
-              <Loader type="spinner" label="Loading" properties={{ spinner: { size: 40 } }} />
-              <Loader type="loader" label="Progress" percentage={seconds} />
-              <Alert {...alertProps} />
+              {(showcaseLoader === "spinner" || showcaseLoader === "both") && (
+                <Loader type="spinner" label="Loading" properties={{ spinner: { size: 40 } }} />
+              )}
+              {(showcaseLoader === "progress" || showcaseLoader === "both") && (
+                <Loader type="loader" label="Progress" percentage={seconds} />
+              )}
+              <Alert {...alertProps} variant={showcaseAlert} />
             </Section>
 
             <Section title="Overlays">
@@ -322,25 +457,42 @@ export function App(props: { onRender?: () => void }) {
                   Next
                 </Button>
               </view>
-              <Stepper
-                steps={STEPPER_STEPS.map((step) => ({
-                  ...step,
-                  icon: { dark: { name: "user" }, light: { name: "user" } },
-                }))}
-                currentStep={stepperStep}
-                variant="grouped"
-                theme={resolvedTheme}
-              />
-              <Stepper
-                steps={[
-                  { title: "Order placed", description: "Received" },
-                  { title: "Processing", description: "Preparing" },
-                  { title: "Shipped", description: "On the way" },
-                ]}
-                currentStep={stepperStep}
-                variant="timeline"
-                theme={resolvedTheme}
-              />
+              {(showcaseStepper === "progress" || showcaseStepper === "all") && (
+                <Stepper
+                  steps={STEPPER_STEPS.map((step) => ({ ...step, icon: { dark: { name: "user" }, light: { name: "user" } } }))}
+                  currentStep={stepperStep}
+                  variant="progress"
+                  theme={resolvedTheme}
+                />
+              )}
+              {(showcaseStepper === "stepCounter" || showcaseStepper === "all") && (
+                <Stepper
+                  steps={STEPPER_STEPS.map((step) => ({ ...step, icon: { dark: { name: "user" }, light: { name: "user" } } }))}
+                  currentStep={stepperStep}
+                  variant="stepCounter"
+                  theme={resolvedTheme}
+                />
+              )}
+              {(showcaseStepper === "grouped" || showcaseStepper === "all") && (
+                <Stepper
+                  steps={STEPPER_STEPS.map((step) => ({ ...step, icon: { dark: { name: "user" }, light: { name: "user" } } }))}
+                  currentStep={stepperStep}
+                  variant="grouped"
+                  theme={resolvedTheme}
+                />
+              )}
+              {(showcaseStepper === "timeline" || showcaseStepper === "all") && (
+                <Stepper
+                  steps={[
+                    { title: "Order placed", description: "Received" },
+                    { title: "Processing", description: "Preparing" },
+                    { title: "Shipped", description: "On the way" },
+                  ]}
+                  currentStep={stepperStep}
+                  variant="timeline"
+                  theme={resolvedTheme}
+                />
+              )}
             </Section>
 
             <Section title="Timeline">
@@ -361,37 +513,52 @@ export function App(props: { onRender?: () => void }) {
             </Section>
 
             <Section title="Breadcrumb">
-              <Breadcrumb
-                items={[
-                  { label: "Home", onPress: () => {} },
-                  { label: "Products", onPress: () => {} },
-                  { label: "Shoes" },
-                ]}
-                divider="chevron"
-                theme={resolvedTheme}
-              />
-              <Breadcrumb
-                items={[
-                  { label: "Home", onPress: () => {} },
-                  { label: "Settings", onPress: () => {} },
-                  { label: "Notifications" },
-                ]}
-                divider="slash"
-                showHomeIcon
-                theme={resolvedTheme}
-              />
+              {(showcaseBreadcrumbDivider === "chevron" || showcaseBreadcrumbDivider === "both") && (
+                <Breadcrumb
+                  items={[
+                    { label: "Home", onPress: () => {} },
+                    { label: "Products", onPress: () => {} },
+                    { label: "Shoes" },
+                  ]}
+                  divider="chevron"
+                  showHomeIcon={showcaseBreadcrumbHomeIcon}
+                  theme={resolvedTheme}
+                />
+              )}
+              {(showcaseBreadcrumbDivider === "slash" || showcaseBreadcrumbDivider === "both") && (
+                <Breadcrumb
+                  items={[
+                    { label: "Home", onPress: () => {} },
+                    { label: "Settings", onPress: () => {} },
+                    { label: "Notifications" },
+                  ]}
+                  divider="slash"
+                  showHomeIcon={showcaseBreadcrumbHomeIcon}
+                  theme={resolvedTheme}
+                />
+              )}
             </Section>
 
             <Section title="Stats">
-              <view className="flex flex-row flex-wrap gap-4">
-                <Stats title="Revenue" value="€45,231" growth={{ value: "+12.5%", trend: "up" }} theme={resolvedTheme} />
-                <Stats title="Users" value="2,350" icon="user" growth={{ value: "-3.2%", trend: "down" }} theme={resolvedTheme} />
+              <view className={`flex flex-row flex-wrap gap-4 ${showcaseStats === "stacked" ? "flex-col" : ""}`}>
+                {(showcaseStats === "inline" || showcaseStats === "both") && (
+                  <>
+                    <Stats title="Revenue" value="€45,231" growth={{ value: "+12.5%", trend: "up" }} theme={resolvedTheme} />
+                    <Stats title="Users" value="2,350" icon="user" growth={{ value: "-3.2%", trend: "down" }} theme={resolvedTheme} />
+                  </>
+                )}
+                {(showcaseStats === "stacked" || showcaseStats === "both") && (
+                  <>
+                    <Stats title="Revenue" value="€45,231" growth={{ value: "+12.5%", trend: "up" }} stacked theme={resolvedTheme} />
+                    <Stats title="Users" value="2,350" icon="user" growth={{ value: "-3.2%", trend: "down" }} stacked theme={resolvedTheme} />
+                  </>
+                )}
               </view>
             </Section>
 
             <Section title="Divider">
-              <Divider variant="base" />
-              <Divider variant="gradient" />
+              {(showcaseDivider === "base" || showcaseDivider === "both") && <Divider variant="base" />}
+              {(showcaseDivider === "gradient" || showcaseDivider === "both") && <Divider variant="gradient" />}
             </Section>
 
             <Section title="Checkbox">
