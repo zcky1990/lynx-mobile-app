@@ -28,6 +28,7 @@ import { Dialog } from './components/Dialog'
 import { Drawer } from './components/Drawer'
 import { Avatar } from './components/Avatar'
 import { ContactUs } from './components/ContactUs'
+import { Stats } from './components/Stats/Stats'
 
 export function App(props: {
   onRender?: () => void
@@ -389,6 +390,46 @@ export function App(props: {
                 showHomeIcon={true}
                 theme={resolvedTheme}
               />
+            </view>
+            <view className="mt-4 flex flex-col gap-3">
+              <text className="text-sm font-medium text-foreground">Stats (HyperUI-style)</text>
+              <view className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+                <Stats
+                  title="Total Revenue"
+                  value="€45,231"
+                  fromValue="from last week"
+                  growth={{ value: '+12.5%', trend: 'up' }}
+                  theme={resolvedTheme}
+                />
+                <Stats
+                  title="Active Users"
+                  value="2,350"
+                  growth={{ value: '-3.2%', trend: 'down' }}
+                  icon="user"
+                  theme={resolvedTheme}
+                />
+                <Stats
+                  title="Events"
+                  value="1,248"
+                  fromValue="from last month"
+                  growth={{ value: '+8.1%', trend: 'up' }}
+                  icon="calendar"
+                  theme={resolvedTheme}
+                />
+                <Stats
+                  title="Title, value and icon"
+                  value="12,234"
+                  icon="bell"
+                  theme={resolvedTheme}
+                />
+                <Stats
+                  title="Stacked stat"
+                  value="€12,400"
+                  growth={{ value: '+4.2%', trend: 'up' }}
+                  stacked
+                  theme={resolvedTheme}
+                />
+              </view>
             </view>
             <view className="mt-4 flex flex-col gap-4">
               <text className="text-sm font-medium text-foreground">Dividers</text>
