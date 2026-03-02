@@ -177,10 +177,10 @@ export function App(props: { onRender?: () => void }) {
   return (
     <view>
       <view className="Background flex flex-col items-center justify-center" />
-      <view className="App bg-background relative max-w-sm flex flex-col" style={{ height: "100vh" }}>
+      <view className="App bg-white relative  flex flex-col" style={{ height: "100vh" }}>
         <scroll-view
           scroll-orientation="vertical"
-          className="flex-1 min-h-0"
+          className="flex-1 min-h-0 max-w-md bg-background"
           style={{
             width: "100%",
             height: SHOW_BOTTOM_NAV ? `calc(100vh - ${BOTTOM_NAV_HEIGHT}px)` : "100vh",
