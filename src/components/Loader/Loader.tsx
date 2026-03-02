@@ -53,7 +53,7 @@ export function Loader(props : LoaderProps) {
                     }
                     style={spinnerStyle}></image>
                 {
-                label ? <text className="font-medium text-gray-700">
+                label ? <text style={loaderTextColorStyle} className="font-medium">
                     {label}</text> : <></>
             } </view>
         );

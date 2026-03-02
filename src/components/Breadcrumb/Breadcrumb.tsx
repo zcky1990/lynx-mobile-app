@@ -1,5 +1,5 @@
 import type { BreadcrumbProps, BreadcrumbItemType } from './BreadcrumbCommon';
-import homeIcon from '../../assets/images/home.svg';
+import { Icon } from '../Icon/Icon';
 
 function BreadcrumbSeparator({ divider }: { divider: NonNullable<BreadcrumbProps['divider']> }) {
   const isSlash = divider === 'slash';
@@ -14,15 +14,13 @@ function BreadcrumbSeparator({ divider }: { divider: NonNullable<BreadcrumbProps
   );
 }
 
-function BreadcrumbItem({
-  item,
-  isCurrent,
-  onPress,
-}: {
+interface BreadcrumbItemComponentProps {
   item: BreadcrumbItemType;
   isCurrent: boolean;
   onPress?: () => void;
-}) {
+}
+
+function BreadcrumbItem({ item, isCurrent, onPress }: BreadcrumbItemComponentProps) {
   const isInteractive = !isCurrent && onPress != null;
   const textClass = isCurrent
     ? 'text-foreground font-medium'
@@ -41,12 +39,14 @@ function BreadcrumbItem({
 
   return (
     <view className={`inline-flex items-center ${textClass}`}>
-      <text className="text-current" >
+      <text className="text-current">
         {item.label}
       </text>
     </view>
   );
 }
+
+const HOME_ICON_SIZE = 16;
 
 export function Breadcrumb(props: BreadcrumbProps) {
   const {
@@ -54,6 +54,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
     divider = 'chevron',
     showHomeIcon = false,
     className = '',
+    theme,
   } = props;
 
   if (items.length === 0) return null;
@@ -75,7 +76,11 @@ export function Breadcrumb(props: BreadcrumbProps) {
                 className="flex items-center gap-1.5 text-muted-foreground active:text-foreground"
                 bindtap={item.onPress}
               >
-                <image src={homeIcon} className="w-4 h-4 shrink-0" />
+                {theme === 'dark' ? (
+                  <Icon name="home" color="white" size={HOME_ICON_SIZE} />
+                ) : (
+                  <Icon name="home" color="black" size={HOME_ICON_SIZE} />
+                )}
                 <BreadcrumbItem
                   item={item}
                   isCurrent={isCurrent}

@@ -377,6 +377,7 @@ export function App(props: {
                   { label: 'Shoes' },
                 ]}
                 divider="chevron"
+                theme={resolvedTheme}
               />
               <Breadcrumb
                 items={[
@@ -385,7 +386,8 @@ export function App(props: {
                   { label: 'Notifications' },
                 ]}
                 divider="slash"
-                showHomeIcon
+                showHomeIcon={true}
+                theme={resolvedTheme}
               />
             </view>
             <view className="mt-4 flex flex-col gap-4">
