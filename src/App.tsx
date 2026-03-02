@@ -627,7 +627,7 @@ export function App(props: { onRender?: () => void }) {
               />
             </Section>
 
-            <Section title="Toast">
+            <Section title="Toast" className="mb-16">
               <view bindtap={() => toggleToast({ ...toastData, toastDuration: 3000, toastVariant: "error" })}>
                 <text className="text-sm text-foreground">Tap to show error toast</text>
               </view>
