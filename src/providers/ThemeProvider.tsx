@@ -1,6 +1,13 @@
-import { createContext, useCallback, useContext, useEffect, useState } from '@lynx-js/react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from '@lynx-js/react'
+import { useStorage } from '../composeable/useStorage'
+
+const THEME_STORAGE_KEY = 'theme'
 
 type Theme = 'light' | 'dark' | 'system'
+
+function isValidTheme(value: unknown): value is Theme {
+  return value === 'light' || value === 'dark' || value === 'system'
+}
 
 interface ThemeContextValue {
   theme: Theme
@@ -16,10 +23,8 @@ declare const lynx: {
 } | undefined
 
 function getSystemTheme(): 'light' | 'dark' {
-  if (typeof lynx !== 'undefined' && lynx?.__globalProps?.appTheme) {
-    const hostTheme = lynx.__globalProps.appTheme
-    if (hostTheme === 'dark' || hostTheme === 'light') return hostTheme
-  }
+  const hostTheme = lynx?.__globalProps?.appTheme
+  if (hostTheme === 'dark' || hostTheme === 'light') return hostTheme
   return 'light'
 }
 
@@ -30,6 +35,9 @@ export function ThemeProvider({
   defaultTheme?: Theme
   children: React.ReactNode
 }) {
+  const { setStorage, getStorage, storedValue } = useStorage()
+  const hasAppliedStoredTheme = useRef(false)
+
   const [theme, setThemeState] = useState<Theme>(defaultTheme)
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() =>
     defaultTheme === 'system' ? getSystemTheme() : defaultTheme
@@ -37,14 +45,32 @@ export function ThemeProvider({
 
   useEffect(() => {
     'background only'
+    getStorage(THEME_STORAGE_KEY)
+  }, [])
+
+  useEffect(() => {
+    'background only'
+    if (hasAppliedStoredTheme.current) return
+    if (storedValue != null && isValidTheme(storedValue)) {
+      hasAppliedStoredTheme.current = true
+      setThemeState(storedValue)
+    }
+  }, [storedValue])
+
+  useEffect(() => {
+    'background only'
     const resolved = theme === 'system' ? getSystemTheme() : theme
     setResolvedTheme(resolved)
   }, [theme])
 
-  const setTheme = useCallback((newTheme: Theme) => {
-    'background only'
-    setThemeState(newTheme)
-  }, [])
+  const setTheme = useCallback(
+    (newTheme: Theme) => {
+      'background only'
+      setStorage(THEME_STORAGE_KEY, newTheme)
+      setThemeState(newTheme)
+    },
+    [setStorage]
+  )
 
   const toggleTheme = useCallback(() => {
     'background only'
