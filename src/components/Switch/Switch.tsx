@@ -4,9 +4,9 @@ import { SwitchThumb } from "./SwitchThumb";
 import { SwitchTrack } from "./SwitchTrack";
 
 function SwitchComponent(props: SwitchProps) {
-  const { value, onValueChange, interaction } = props;
+  const { value, onValueChange, interaction, thumbIcon } = props;
   return (
-    <SwitchRoot value={value} onValueChange={onValueChange} interaction={interaction}>
+    <SwitchRoot value={value} onValueChange={onValueChange} interaction={interaction} thumbIcon={thumbIcon}>
       <SwitchTrack>
         <SwitchThumb />
       </SwitchTrack>

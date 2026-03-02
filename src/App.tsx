@@ -154,13 +154,10 @@ export function App(props: {
             </view>
             <Switch
               value={resolvedTheme === 'dark' ? 'on' : 'off'}
-              onValueChange={(value: any) => {
-                if (value === 'on') {
-                  setTheme('dark')
-                } else {
-                  setTheme('light')
-                }
+              onValueChange={(value) => {
+                setTheme(value === 'on' ? 'dark' : 'light')
               }}
+              thumbIcon={{ on: { name: 'moon', color: 'white' }, off: { name: 'sun', color: 'black' } }}
             />
             <Timeline theme={resolvedTheme}>
               <Timeline.Item>

@@ -533,7 +533,7 @@ Vertical list of notification settings: each row has title, description, and a s
 
 ## Switch
 
-Toggle switch. Use the compound **Switch** (convenience) or **Switch.Root** + **Switch.Track** + **Switch.Thumb** for custom layout.
+Toggle switch. Use the compound **Switch** (convenience) or **Switch.Root** + **Switch.Track** + **Switch.Thumb** for custom layout. Optional icons in the thumb via `thumbIcon` from **SwitchCommon**: `{ on?: IconType, off?: IconType, default?: IconType }` where `IconType` is `{ name: string; size?: number; color?: string }`.
 
 **Import:** `import { Switch } from './components/Switch/Switch'`
 
@@ -543,12 +543,32 @@ Toggle switch. Use the compound **Switch** (convenience) or **Switch.Root** + **
 |------|------|---------|-------------|
 | `value` | `'on' \| 'off'` | — | Current state |
 | `onValueChange` | `(value: 'on' \| 'off') => void` | — | Change handler |
-| `interaction` | `'enabled' \| 'disabled'` | — | Disabled when `'disabled'` |
+| `interaction` | `'enabled' \| 'disabled'` | `'enabled'` | Disabled when `'disabled'` |
+| `theme` | `string` | — | Optional theme (e.g. for styling) |
+| `thumbIcon` | `ThumbIcon` | — | Icons in thumb: `on`, `off`, and/or `default` (each `{ name, size?, color? }`) |
 
 ### Example
 
 ```tsx
 <Switch value={notify} onValueChange={setNotify} />
+
+// Theme toggle with sun (off) / moon (on)
+<Switch
+  value={resolvedTheme === 'dark' ? 'on' : 'off'}
+  onValueChange={(value) => setTheme(value === 'on' ? 'dark' : 'light')}
+  thumbIcon={{ on: { name: 'moon' }, off: { name: 'sun' } }}
+/>
+
+// With custom size/color per state
+<Switch
+  value="on"
+  onValueChange={() => {}}
+  thumbIcon={{
+    on: { name: 'moon', size: 14, color: 'var(--primary)' },
+    off: { name: 'sun', size: 14 },
+  }}
+/>
+
 <Switch value="off" onValueChange={(v) => {}} interaction="disabled" />
 ```
 
