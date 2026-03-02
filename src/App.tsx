@@ -31,6 +31,7 @@ import { ContactUs } from './components/ContactUs'
 import { Stats } from './components/Stats/Stats'
 import { Stepper } from './components/Stepper/Stepper'
 import { BottomNavigation } from './components/BottomNavigation'
+import { DatePicker } from './components/DatePicker'
 
 export function App(props: {
   onRender?: () => void
@@ -123,6 +124,7 @@ export function App(props: {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [stepperStep, setStepperStep] = useState(0)
   const [bottomNavActiveId, setBottomNavActiveId] = useState('home')
+  const [selectedDate, setSelectedDate] = useState<Date | string | null>(null)
   const [lastDropdownSelection, setLastDropdownSelection] = useState<string | null>(null)
   const [inputSample, setInputSample] = useState('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...')
   const [textAreaSample, setTextAreaSample] = useState<string>(`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`)
@@ -240,7 +242,15 @@ export function App(props: {
                 return null; 
               }}
               value={inputSample} onChange={(value) => {setInputSample(value as string)}} onPress={(value) => {console.log('Input pressed ', value)}} />
-            
+            <view className="mt-4">
+              <DatePicker
+                label="Date"
+                placeholder="Pick a date"
+                value={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                theme={resolvedTheme}
+              />
+            </view>
             <text className='text-foreground'>{textAreaSample}</text>
             <TextArea 
               label="TextArea Sample label" 
