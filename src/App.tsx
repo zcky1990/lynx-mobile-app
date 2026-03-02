@@ -29,6 +29,7 @@ import { Drawer } from './components/Drawer'
 import { Avatar } from './components/Avatar'
 import { ContactUs } from './components/ContactUs'
 import { Stats } from './components/Stats/Stats'
+import { Stepper } from './components/Stepper/Stepper'
 
 export function App(props: {
   onRender?: () => void
@@ -119,6 +120,7 @@ export function App(props: {
 
   const [dialogOpen, setDialogOpen] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [stepperStep, setStepperStep] = useState(0)
   const [lastDropdownSelection, setLastDropdownSelection] = useState<string | null>(null)
   const [inputSample, setInputSample] = useState('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...')
   const [textAreaSample, setTextAreaSample] = useState<string>(`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`)
@@ -177,6 +179,53 @@ export function App(props: {
                 </text>
               </Timeline.Item>
             </Timeline>
+            <view className="mt-4 flex flex-col gap-4">
+              <text className="text-sm font-medium text-foreground">Stepper (HyperUI steps)</text>
+              <view className="flex flex-row gap-2 flex-wrap">
+                <Button variant="outline" size="sm" onPress={() => setStepperStep((s) => Math.max(0, s - 1))}>Prev</Button>
+                <Button variant="outline" size="sm" onPress={() => setStepperStep((s) => Math.min(2, s + 1))}>Next</Button>
+              </view>
+              <Stepper
+                steps={[
+                  { title: 'Account', description: 'Set up your account', icon: { dark: { name: 'check', color: 'white' }, light: { name: 'check', color: 'black' } } },
+                  { title: 'Settings', description: 'Configure preferences', icon: { dark: { name: 'check', color: 'white' }, light: { name: 'check', color: 'black' } } },
+                  { title: 'Done', description: 'You are all set', icon: { dark: { name: 'check', color: 'white' }, light: { name: 'check', color: 'black' } } },
+                ]}
+                currentStep={stepperStep}
+                variant="progress"
+                theme={resolvedTheme}
+              />
+              <Stepper
+                steps={[
+                  { title: 'Step 1', icon: { dark: { name: 'moon' }, light: { name: 'sun' } } },
+                  { title: 'Step 2', icon: { dark: { name: 'bell' }, light: { name: 'bell' } } },
+                  { title: 'Step 3', icon: { default: { name: 'check' } } },
+                ]}
+                currentStep={stepperStep}
+                variant="stepCounter"
+                theme={resolvedTheme}
+              />
+              <Stepper
+                steps={[
+                  { title: 'Account', description: 'Create your account' },
+                  { title: 'Profile', description: 'Add your details' },
+                  { title: 'Complete', description: 'You are done' },
+                ]}
+                currentStep={stepperStep}
+                variant="grouped"
+                theme={resolvedTheme}
+              />
+              <Stepper
+                steps={[
+                  { title: 'Order placed', description: 'Your order has been received' },
+                  { title: 'Processing', description: 'We are preparing your order' },
+                  { title: 'Shipped', description: 'On the way' },
+                ]}
+                currentStep={stepperStep}
+                variant="timeline"
+                theme={resolvedTheme}
+              />
+            </view>
             <text className='text-foreground'>{inputSample}</text>
             <Input label="Input" 
               placeholder="Input" 

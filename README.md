@@ -42,16 +42,17 @@ This document describes how to use all UI components in the Paguyuban Lynx app. 
 12. [Input](#input)
 13. [Loader](#loader)
 14. [SettingsNotifications](#settingsnotifications)
-15. [Switch](#switch)
-16. [Tabs](#tabs)
-17. [Table](#table)
-18. [TextArea](#textarea)
-19. [Timeline](#timeline)
-20. [Toast](#toast)
-21. [Dialog](#dialog)
-22. [Drawer](#drawer)
-23. [Contact Us (ContactUs)](#contact-us-contactus)
-24. [Marketing Sections (SectionContentImage)](#marketing-sections-sectioncontentimage)
+15. [Stepper](#stepper)
+16. [Switch](#switch)
+17. [Tabs](#tabs)
+18. [Table](#table)
+19. [TextArea](#textarea)
+20. [Timeline](#timeline)
+21. [Toast](#toast)
+22. [Dialog](#dialog)
+23. [Drawer](#drawer)
+24. [Contact Us (ContactUs)](#contact-us-contactus)
+25. [Marketing Sections (SectionContentImage)](#marketing-sections-sectioncontentimage)
 
 ---
 
@@ -526,6 +527,42 @@ Vertical list of notification settings: each row has title, description, and a s
     { title: 'Email', description: 'Receive email notifications', value: 'on', onValueChange: (v) => {} },
     { title: 'Push', description: 'Push notifications', value: 'off', onValueChange: (v) => {} },
   ]}
+/>
+```
+
+---
+
+## Stepper
+
+Step indicators with progress bar, styled after [HyperUI Application steps](https://www.hyperui.dev/components/application/steps). Supports variants: **progress** (title + icon + bar), **stepCounter** (step X of N + bar), **grouped** (cards with title/description, current highlighted), **timeline** (vertical timeline). Icons use **dark/light** (theme) instead of on/off: same pattern as Switch but with `StepIconConfig`: `{ dark?: IconType, light?: IconType, default?: IconType }`.
+
+**Import:** `import { Stepper } from './components/Stepper/Stepper'`
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `steps` | `StepItem[]` | — | Steps: each `{ title?, description?, icon?: StepIconConfig }` |
+| `currentStep` | `number` | — | Current step index (0-based) |
+| `variant` | `'progress' \| 'stepCounter' \| 'grouped' \| 'timeline'` | `'progress'` | Layout style |
+| `theme` | `'light' \| 'dark'` | — | Used to resolve step icons (dark/light) |
+| `showProgressBar` | `boolean` | `true` | Show progress bar where applicable |
+| `className` | `string` | — | Optional class name |
+
+**StepIconConfig:** `{ dark?: IconType, light?: IconType, default?: IconType }` — icons by theme (dark/light) or fallback default. **IconType:** `{ name: string; size?: number; color?: string }`.
+
+### Example
+
+```tsx
+<Stepper
+  steps={[
+    { title: 'Account', description: 'Set up account', icon: { dark: { name: 'user' }, light: { name: 'user' } } },
+    { title: 'Settings', description: 'Configure', icon: { dark: { name: 'setting' }, light: { name: 'setting' } } },
+    { title: 'Done', icon: { default: { name: 'check' } } },
+  ]}
+  currentStep={1}
+  variant="grouped"
+  theme={resolvedTheme}
 />
 ```
 
