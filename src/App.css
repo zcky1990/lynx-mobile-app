@@ -424,16 +424,16 @@
   border-radius: 50%;
   background-color: var(--primary-foreground);
   box-sizing: border-box;
-  transform: translateY(-50%) translateX(0);
+  transform: translateY(-50%) translateX(-5%);
   transition: transform 0.3s ease-in-out;
 }
 .Switch-track--on .Switch-thumb,
 .Switch-track[data-value="on"] .Switch-thumb {
-  transform: translateY(-50%) translateX(85%);
+  transform: translateY(-50%) translateX(90%);
 }
 .Switch-track--off .Switch-thumb,
 .Switch-track[data-value="off"] .Switch-thumb {
-  transform: translateY(-50%) translateX(0);
+  transform: translateY(-50%) translateX(-5%);
 }
 
 /* Accordion: smooth open/close with CSS */
