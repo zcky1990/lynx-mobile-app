@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@lynx-js/react": "^0.116.3",
+    "date-fns": "^4.1.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
