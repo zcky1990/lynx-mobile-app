@@ -4,7 +4,8 @@ import { Icon } from "../Icon/Icon";
 import { SwitchContext } from "./SwitchContext";
 
 const DEFAULT_ICON_SIZE = 12;
-const DEFAULT_ICON_COLOR = "var(--primary)";
+/** Hex fallback; CSS vars (e.g. var(--primary)) do not resolve inside data-URL SVGs in Lynx. */
+const DEFAULT_ICON_COLOR = "#333333";
 
 export interface SwitchThumbProps {
   /** Custom content (e.g. Icon) when not using thumbIcon on Root */
