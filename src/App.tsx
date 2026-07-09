@@ -192,7 +192,7 @@ export function App(props: { onRender?: () => void }) {
                 <text className="text-sm text-foreground">Theme: {resolvedTheme}</text>
                 <Switch
                   value={resolvedTheme === "dark" ? "on" : "off"}
-                  onValueChange={(v) => setTheme(v === "on" ? "dark" : "light")}
+                  onValueChange={(v: "on" | "off") => setTheme(v === "on" ? "dark" : "light")}
                   thumbIcon={{
                     on: { name: "moon", color: "#ffe0c2" },
                     off: { name: "sun", color: "#644a40" },
@@ -272,7 +272,7 @@ export function App(props: { onRender?: () => void }) {
                     <text className="text-sm text-foreground">Home icon</text>
                     <Switch
                       value={showcaseBreadcrumbHomeIcon ? "on" : "off"}
-                      onValueChange={(v) => setShowcaseBreadcrumbHomeIcon(v === "on")}
+                      onValueChange={(v: "on" | "off") => setShowcaseBreadcrumbHomeIcon(v === "on")}
                     />
                   </view>
                 </view>

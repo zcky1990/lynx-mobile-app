@@ -37,7 +37,7 @@ export const Toast = (props : ToastProps & {
                         getBackgroundColor()
                     } rounded-lg border ${
                         getBorderColor()
-                    } border-gray-100 shadow-sm px-4 py-3 text-left text-sm relative shadow-sm w-full max-w-lg-full max-w-lg`
+                    } border-gray-100 px-4 py-3 text-left text-sm relative shadow-sm w-full max-w-lg`
                 }>
                     <view className="col-span-2 flex items-center justify-between gap-4">
                         <view className="flex flex-col gap-0.5">

@@ -20,6 +20,24 @@ Scan the QRCode in the terminal with your LynxExplorer App to see the result.
 
 You can start editing the page by modifying `src/App.tsx`. The page auto-updates as you edit the file.
 
+## Storybook
+
+Interactive component documentation is available via Storybook.
+
+```bash
+pnpm run storybook
+```
+
+Opens Storybook at `http://localhost:6006`. Each component has stories covering variants, props, and usage patterns.
+
+To build a static Storybook:
+
+```bash
+pnpm run build-storybook
+```
+
+Output goes to `storybook-static/`.
+
 
 # Component Library
 

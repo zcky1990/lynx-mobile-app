@@ -40,7 +40,7 @@ export const Timeline = (props : TimeLineProps & {
     }
 
     return (
-        <view className="relative space-y-8">
+        <view className="relative flex flex-col gap-8">
             {
             children && Array.isArray(children) && children.map((child, index) => (renderTimeLineItem(child, index)))
         } </view>
